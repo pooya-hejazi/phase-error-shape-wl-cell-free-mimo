@@ -1,0 +1,41 @@
+{
+  "validation": {
+    "hermitian_error": 2.168404344971009e-19,
+    "min_eigenvalue": 5.763834618820982e-06,
+    "unit_diagonal_relative_error": 0.0,
+    "correlation_lag1": 0.9769874495540591,
+    "los_fraction_forced": 1.0,
+    "los_probability_at_100m": 0.3476708368442312,
+    "los_probability_at_300m": 0.06803635091090489
+  },
+  "variants": [
+    {
+      "standard_los": false,
+      "topologies": 64,
+      "realizations": 32,
+      "mean_r_U": 1.2062639288222994,
+      "mean_r_G": 1.1422069682583422,
+      "mean_r_B": 1.2756698063236556,
+      "effect": 1.9385112396381046,
+      "full_order": 64,
+      "B_gt_U": 64,
+      "U_gt_G": 64,
+      "los_fraction_mean": 1.0,
+      "seconds": 248.9380000000001
+    },
+    {
+      "standard_los": true,
+      "topologies": 64,
+      "realizations": 32,
+      "mean_r_U": 1.0624032663016751,
+      "mean_r_G": 1.0424398439262201,
+      "mean_r_B": 1.0834028732396481,
+      "effect": 1.965202166733706,
+      "full_order": 60,
+      "B_gt_U": 60,
+      "U_gt_G": 64,
+      "los_fraction_mean": 0.083740234375,
+      "seconds": 248.3119999999999
+    }
+  ]
+}

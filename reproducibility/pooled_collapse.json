@@ -1,0 +1,54 @@
+{
+  "M090": {
+    "per_run": {
+      "v08": {
+        "n": 64,
+        "effect": 2.1196109702848998,
+        "full_order": 64
+      },
+      "rep": {
+        "n": 64,
+        "effect": 2.207872033264712,
+        "full_order": 64
+      },
+      "exp": {
+        "n": 64,
+        "effect": 2.081399068420076,
+        "full_order": 64
+      }
+    },
+    "pooled_n": 192,
+    "pooled_effect": 2.1372452505370125,
+    "pooled_interval": [
+      2.0789193292724235,
+      2.2074038563189164
+    ],
+    "pooled_full_order": 192
+  },
+  "M099": {
+    "per_run": {
+      "v08": {
+        "n": 64,
+        "effect": 1.038925876217991,
+        "full_order": 30
+      },
+      "rep": {
+        "n": 64,
+        "effect": 1.08422570469392,
+        "full_order": 38
+      },
+      "exp": {
+        "n": 64,
+        "effect": 1.0518000743179308,
+        "full_order": 29
+      }
+    },
+    "pooled_n": 192,
+    "pooled_effect": 1.0589764845877254,
+    "pooled_interval": [
+      1.0347764371764046,
+      1.086118594523858
+    ],
+    "pooled_full_order": 97
+  }
+}

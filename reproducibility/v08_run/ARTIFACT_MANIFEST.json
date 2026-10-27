@@ -1,0 +1,406 @@
+{
+ "identity": "R2C01_DIRA_SHAPE_v08",
+ "evidence_role": "EXPLORATORY_NON_CONFIRMATORY",
+ "status": "FROZEN_WAITING_FOR_REVIEW_NOT_EXECUTED",
+ "generated_utc": "2026-10-25T16:58:05Z",
+ "root": "C:\\Users\\p.hejazi\\Documents\\NewPaperProject\\repo",
+ "packet": "docs/claude_review/R2C01_DIRA_SHAPE_v08",
+ "hash_policy": "SHA-256 of raw file bytes; the driver uses hashlib in binary mode. Text files are UTF-8; LF is the packet convention; no byte-order mark. The manifest excludes itself and runtime artifacts; the reviewer hashes the manifest separately.",
+ "git": {
+  "branch": "claude/brave-sagan-bpsmc0",
+  "head": "e613f8ebe6867ed01e383c7bf42c6177f168124f",
+  "origin_main": "b2e910a8ec5fafb4c6f82a23c3bcac75987ee6d5",
+  "core_autocrlf": "false",
+  "tracked_modified": "",
+  "untracked": "?? docs/claude_review/R2C01_DIRA_SHAPE_v01/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v02/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v03/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v04/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v05/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v06/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v07/\n?? docs/claude_review/R2C01_DIRA_SHAPE_v08/"
+ },
+ "environment": {
+  "python_version": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "prefix": "C:\\Users\\p.hejazi\\Documents\\NewPaperProject\\repo\\.venv",
+  "prefix_is_project_local": true,
+  "packages": {
+   "numpy": "2.5.2",
+   "scipy": "1.18.1",
+   "PyYAML": "6.0.3"
+  },
+  "wheel_sha256": {
+   "numpy": "28ac63476ec7651484215ee7fa15a1f78b57c14621f01e392afe17b9a1390ce4",
+   "scipy": "5e4d44984abc0020154ea81b247adeddcc3ac5527b975ff798bd1ba0adc513c2",
+   "PyYAML": "5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b"
+  },
+  "intended_blas_env": {
+   "OMP_NUM_THREADS": "1",
+   "OPENBLAS_NUM_THREADS": "1",
+   "MKL_NUM_THREADS": "1"
+  },
+  "smoke_test_pass": true
+ },
+ "inputs_checksum": {
+  "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E10_shape_inputs.sha256",
+  "sha256": "f6b80d2407d10e03ab4d2080778882c4103da74e69775cd5809f1249028117e9",
+  "entries": 23,
+  "required_inputs": [
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E10_shape_run.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E10_shape_config.json",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_core.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_model.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_estimators.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_stats.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_rows.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_ordering.py",
+   "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_run_support.py"
+  ],
+  "binds": "the packet run modules, the config, the environment lock and the 12 imported src/phase_graph_cme files"
+ },
+ "files": [
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/AUTHORIZATIONS.md",
+   "role": "document",
+   "bytes": 7654,
+   "sha256": "e05f88a7dd96167bb0034b5a5cb83993b85b0dccb2d5a3c08362513b4d386a78",
+   "crlf_lines": 0,
+   "lf_count": 138,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/DERIVATION.md",
+   "role": "document",
+   "bytes": 12876,
+   "sha256": "ab90ec08a1c2ead165cbffcd69d5b028a5018e31ac9b13351fb61526cbc93999",
+   "crlf_lines": 0,
+   "lf_count": 273,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/PENDING_LEDGER_ENTRY.md",
+   "role": "document",
+   "bytes": 4945,
+   "sha256": "c026209e5e744167fd455c2e41b9d74d66fc67fa03061737762052ec975b2bce",
+   "crlf_lines": 0,
+   "lf_count": 86,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/REVIEW_REQUEST.md",
+   "role": "document",
+   "bytes": 5688,
+   "sha256": "c3ebf523d89ac71ef6e1f9e81a6e7be81e5eb84180327051ab8a4c68afcb50ff",
+   "crlf_lines": 0,
+   "lf_count": 99,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/REVIEW_RESPONSE_MATRIX.md",
+   "role": "document",
+   "bytes": 3931,
+   "sha256": "e5178917f67b21b763a1f10e0808e732148ca7dcf48d17d7bc5d41cd34c5ee7e",
+   "crlf_lines": 0,
+   "lf_count": 60,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/SCOPE.md",
+   "role": "document",
+   "bytes": 27559,
+   "sha256": "32d59eaf1113ad6317f4788b9891ef75db2be8bc79d441e89b0e88e8647194da",
+   "crlf_lines": 0,
+   "lf_count": 379,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/STATUS.md",
+   "role": "document",
+   "bytes": 9081,
+   "sha256": "c764690e7ac6fc25f836d1086aff5a30832f73ef175f5e32a11871bccda4167d",
+   "crlf_lines": 0,
+   "lf_count": 150,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E10_shape_config.json",
+   "role": "config",
+   "bytes": 4941,
+   "sha256": "0e21a89ce7b70a4d80ccfd776023cf68b5c8803f4227c9c8aef598975f119b8c",
+   "crlf_lines": 0,
+   "lf_count": 123,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E10_shape_inputs.sha256",
+   "role": "input_checksums",
+   "bytes": 2597,
+   "sha256": "f6b80d2407d10e03ab4d2080778882c4103da74e69775cd5809f1249028117e9",
+   "crlf_lines": 0,
+   "lf_count": 23,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E10_shape_run.py",
+   "role": "code",
+   "bytes": 56931,
+   "sha256": "ca71b87a2bf7b2979e5b4b042cebed8ea7b19fe68242b02de66e420d483fa08d",
+   "crlf_lines": 0,
+   "lf_count": 1343,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/E6_shape_manifest.py",
+   "role": "builder",
+   "bytes": 9240,
+   "sha256": "8a3ee19dd6645c485bdf18ad5b3eff4eacb6153513e9c449d67ca7545ae1a7c8",
+   "crlf_lines": 0,
+   "lf_count": 258,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/ENVIRONMENT_LOCK.json",
+   "role": "environment_receipt",
+   "bytes": 2990,
+   "sha256": "e4aa0522f9655577ed448a39017c6c44664d279c87d226d10713c6b5747295a5",
+   "crlf_lines": 0,
+   "lf_count": 58,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/requirements.lock",
+   "role": "environment_lock",
+   "bytes": 675,
+   "sha256": "20731115a5dbee1257eaac13cd360331a56dd28b70f847784eb7c6a14389e4a6",
+   "crlf_lines": 0,
+   "lf_count": 12,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_core.py",
+   "role": "code",
+   "bytes": 12179,
+   "sha256": "961cf76881abfa9ee0c578a125bfede77dfb7897e83accc0b665b3fe6d3328c2",
+   "crlf_lines": 0,
+   "lf_count": 340,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_estimators.py",
+   "role": "code",
+   "bytes": 8516,
+   "sha256": "3c1b00ff98f9c449ca2a672cfc8e3bed6fc3a5d41325f92e006e80703fb0dead",
+   "crlf_lines": 0,
+   "lf_count": 223,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_model.py",
+   "role": "code",
+   "bytes": 7620,
+   "sha256": "38d5099fe5aa918c380ed751a529d6aad59145028c0e65b203bed97b6c13b11f",
+   "crlf_lines": 0,
+   "lf_count": 192,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_ordering.py",
+   "role": "code",
+   "bytes": 11483,
+   "sha256": "ddd6e097d978e43744538b3329e971092eec16b75658c6376184ec46a610b59d",
+   "crlf_lines": 0,
+   "lf_count": 313,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_rows.py",
+   "role": "code",
+   "bytes": 7803,
+   "sha256": "ed592bbce008ffd96f373fc5e6e6ffdc399ed4548248bd10eff69f176566788b",
+   "crlf_lines": 0,
+   "lf_count": 206,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_run_support.py",
+   "role": "code",
+   "bytes": 2679,
+   "sha256": "ec76cd95c0cf31f3fcf702779cebc2df6df632816ff8e2712014f00a4be8668f",
+   "crlf_lines": 0,
+   "lf_count": 72,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/shape_stats.py",
+   "role": "code",
+   "bytes": 3835,
+   "sha256": "57388374ea6ce0f28e554c475d206726a72ce73033ebcd6e915d0635c9983ab9",
+   "crlf_lines": 0,
+   "lf_count": 116,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/test_shape_controls.py",
+   "role": "test",
+   "bytes": 7664,
+   "sha256": "c4a974c21a59126778ff7992fa406da62e09f74c63c64845a7b8547e534b32bd",
+   "crlf_lines": 0,
+   "lf_count": 217,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/__init__.py",
+   "role": "library_input",
+   "bytes": 784,
+   "sha256": "48231f16d6030c5d31ad23c8f40698d80595ce9a85ce8a9387b70c5a0f639c88",
+   "crlf_lines": 0,
+   "lf_count": 29,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/baselines.py",
+   "role": "library_input",
+   "bytes": 5906,
+   "sha256": "d08e9ad2e961778d36583ac6116764dd942a9371e6cfde7b2e70a83cdcf0e1fc",
+   "crlf_lines": 0,
+   "lf_count": 158,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/controller.py",
+   "role": "library_input",
+   "bytes": 14448,
+   "sha256": "49960762ad2bdbf84af4300731e2c2335cc47f086f7b6942c6b6765392922ed8",
+   "crlf_lines": 0,
+   "lf_count": 378,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/diagnostics.py",
+   "role": "library_input",
+   "bytes": 2438,
+   "sha256": "c94366fa363cf7b9e147d1e5dde2a2456b5bd9f24feaf21c1d38b0e6343b944e",
+   "crlf_lines": 0,
+   "lf_count": 67,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/inference.py",
+   "role": "library_input",
+   "bytes": 21211,
+   "sha256": "8f6946c2dae1882b43dc492c6b445d5b9c11677449142931a1e07a3622e7defe",
+   "crlf_lines": 0,
+   "lf_count": 564,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/metrics.py",
+   "role": "library_input",
+   "bytes": 3174,
+   "sha256": "32d828dc74be2143fe52f485b34e939b3ea1bf72cf1a41b815dde373e2244a1e",
+   "crlf_lines": 0,
+   "lf_count": 79,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/model.py",
+   "role": "library_input",
+   "bytes": 5078,
+   "sha256": "df92977f49f60405fc75ab799dd8d1e04cba0d15be7f6932f313e888a1d29207",
+   "crlf_lines": 0,
+   "lf_count": 136,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/moments.py",
+   "role": "library_input",
+   "bytes": 3005,
+   "sha256": "619166e2d66de47334e1f1f72d31839df749ac0687504a03cecdaaed0e7856b6",
+   "crlf_lines": 0,
+   "lf_count": 77,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/posterior.py",
+   "role": "library_input",
+   "bytes": 2588,
+   "sha256": "cf2e67dcba0c1caf77dedf71084b9cfd9d0f72e376664fb01c09a8cfdd82cb9a",
+   "crlf_lines": 0,
+   "lf_count": 76,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/production_registry.py",
+   "role": "library_input",
+   "bytes": 29309,
+   "sha256": "0c147fc5e69d7e30f854b2591a4c0480cc9b1deda39ec2a45369cd3949a6bd1d",
+   "crlf_lines": 0,
+   "lf_count": 776,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/receivers.py",
+   "role": "library_input",
+   "bytes": 1039,
+   "sha256": "f84624360a4d1f14751a9f42cb3ea49b822e50fbcff239281cfa725f32d96829",
+   "crlf_lines": 0,
+   "lf_count": 30,
+   "utf8": true,
+   "bom": false
+  },
+  {
+   "path": "src/phase_graph_cme/scenario.py",
+   "role": "library_input",
+   "bytes": 11475,
+   "sha256": "78cf8dcf3830957288175c9d8a3bf47258743bf19c403735001c25299b42fce2",
+   "crlf_lines": 0,
+   "lf_count": 303,
+   "utf8": true,
+   "bom": false
+  }
+ ],
+ "counts": {
+  "packet_files": 21,
+  "library_inputs": 12,
+  "total": 33
+ },
+ "output": {
+  "path": "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/output/E10_shape_output.json",
+  "exists": false,
+  "marker_exists": false,
+  "note": "not executed; the one execution is gated by the review and the run instruction"
+ },
+ "notes": [
+  "The packet is frozen with this manifest. The manifest does not hash itself.",
+  "The v01-v07 folders are audit trails and are not part of this freeze.",
+  "The .venv, the wheel cache and the output directory are not committed and are not in this manifest.",
+  "The v02 SEDIAG output is unreviewed (T4A.5) and is not evidence here.",
+  "No commit and no push; APPROVE_GITHUB_PUSH has not been supplied."
+ ]
+}

@@ -1,0 +1,123 @@
+{
+ "identity": "R2C01_DIRA_SHAPE_REP_v01",
+ "evidence_role": "CONFIRMATORY_REPLICATION_OF_THE_PRIMARY_SHAPE_EFFECT",
+ "namespace": "R2C01_DIRA_SHAPE_REP_01",
+ "base_seed": 202610260001,
+ "system": {
+  "access_points": 32,
+  "users": 16,
+  "pilot_symbols": 4,
+  "coherence_symbols": 200,
+  "area_side": 1.0,
+  "minimum_distance": 0.03,
+  "pathloss_exponent": 3.7,
+  "spatial_correlation": 0.4,
+  "pilot_assignment": "balanced_random",
+  "phase_error_model": "packet_local_shape",
+  "pilot_power": 1.0,
+  "payload_power": 1.0,
+  "pilot_noise_variance": 1.0,
+  "payload_noise_variance": 1.0
+ },
+ "antenna_cases": [
+  {
+   "id": "N4_PRIMARY",
+   "antennas_per_ap": 4,
+   "topologies": 64,
+   "realizations_per_topology": 64,
+   "cells": [
+    "U_K5_M099", "G_K5_M099", "B_K5_M099",
+    "U_K5_M090", "G_K5_M090", "B_K5_M090",
+    "U_K20_M099", "G_K20_M099", "B_K20_M099",
+    "U_K20_M090", "G_K20_M090", "B_K20_M090",
+    "ZERO_K20_M090", "FIXED_K20_M1", "PROPER_K0",
+    "U_K20_M070", "G_K20_M070", "B_K20_M070"
+   ]
+  },
+  {
+   "id": "N1_SUPPLEMENTARY",
+   "antennas_per_ap": 1,
+   "topologies": 64,
+   "realizations_per_topology": 64,
+   "cells": [
+    "U_K20_M099", "G_K20_M099", "B_K20_M099",
+    "U_K20_M090", "G_K20_M090", "B_K20_M090",
+    "ZERO_K20_M090"
+   ]
+  }
+ ],
+ "cells": {
+  "U_K5_M099": {"kappa": 5.0, "m1": 0.99, "shape": "uniform", "role": "SHAPE"},
+  "G_K5_M099": {"kappa": 5.0, "m1": 0.99, "shape": "wrapped_gaussian", "role": "SHAPE"},
+  "B_K5_M099": {"kappa": 5.0, "m1": 0.99, "shape": "binary", "role": "SHAPE"},
+  "U_K5_M090": {"kappa": 5.0, "m1": 0.90, "shape": "uniform", "role": "SHAPE"},
+  "G_K5_M090": {"kappa": 5.0, "m1": 0.90, "shape": "wrapped_gaussian", "role": "SHAPE"},
+  "B_K5_M090": {"kappa": 5.0, "m1": 0.90, "shape": "binary", "role": "SHAPE"},
+  "U_K20_M099": {"kappa": 20.0, "m1": 0.99, "shape": "uniform", "role": "SHAPE"},
+  "G_K20_M099": {"kappa": 20.0, "m1": 0.99, "shape": "wrapped_gaussian", "role": "SHAPE"},
+  "B_K20_M099": {"kappa": 20.0, "m1": 0.99, "shape": "binary", "role": "SHAPE"},
+  "U_K20_M090": {"kappa": 20.0, "m1": 0.90, "shape": "uniform", "role": "SHAPE"},
+  "G_K20_M090": {"kappa": 20.0, "m1": 0.90, "shape": "wrapped_gaussian", "role": "SHAPE"},
+  "B_K20_M090": {"kappa": 20.0, "m1": 0.90, "shape": "binary", "role": "SHAPE"},
+  "ZERO_K20_M090": {"kappa": 20.0, "m1": 0.90, "shape": "zero_c", "role": "STRUCTURAL_EQUALITY_CONTROL"},
+  "FIXED_K20_M1": {"kappa": 20.0, "m1": 1.0, "shape": "fixed", "role": "STRUCTURAL_EQUALITY_CONTROL"},
+  "PROPER_K0": {"kappa": 0.0, "m1": 0.0, "shape": "proper", "role": "STRUCTURAL_EQUALITY_CONTROL"},
+  "U_K20_M070": {"kappa": 20.0, "m1": 0.70, "shape": "uniform", "role": "SECONDARY"},
+  "G_K20_M070": {"kappa": 20.0, "m1": 0.70, "shape": "wrapped_gaussian", "role": "SECONDARY"},
+  "B_K20_M070": {"kappa": 20.0, "m1": 0.70, "shape": "binary", "role": "SECONDARY"}
+ },
+ "receivers": [
+  {"id": "RZF_L1", "regularization": 1.0, "role": "PRIMARY"},
+  {"id": "MR", "regularization": null, "role": "SECONDARY"}
+ ],
+ "statistics": {
+  "unit": "topology",
+  "primary_metric": "per_topology_mse_ratio_B2_over_B1",
+  "primary_family": ["U_K20_M090", "G_K20_M090", "B_K20_M090"],
+  "primary_family_antenna_case": "N4_PRIMARY",
+  "primary_family_receiver": "RZF_L1",
+  "primary_pairwise": [
+   ["B_K20_M090", "U_K20_M090"],
+   ["U_K20_M090", "G_K20_M090"],
+   ["B_K20_M090", "G_K20_M090"]
+  ],
+  "primary_predicted_signs": ["POSITIVE", "POSITIVE", "POSITIVE"],
+  "alpha": 0.05,
+  "primary_adjustment": "BONFERRONI_3",
+  "bootstrap_resamples": 10000,
+  "quantile_method": "linear",
+  "effect_size_threshold": 1.5,
+  "collapse_cells": ["U_K20_M099", "G_K20_M099", "B_K20_M099"],
+  "collapse_antenna_case": "N4_PRIMARY",
+  "collapse_receiver": "RZF_L1",
+  "collapse_threshold": 1.1,
+  "minimum_complete_topologies_for_an_interval": 2,
+  "secondary_descriptive": {
+   "role": "DESCRIPTIVE_ONLY_NOT_A_FORMAL_ORDERING_TEST",
+   "blocks": ["K5_M099_N4", "K5_M090_N4", "K20_M070_N4", "K20_M099_N1", "K20_M090_N1"],
+   "note": "The K5, N1 and m1=0.70 blocks are reported as per-cell means and per-topology ratios. They are not part of the primary ordering test and cannot establish the claim at those settings."
+  }
+ },
+ "controls": {
+  "equality_estimate_relative_tolerance": 1e-8,
+  "equality_se_absolute_tolerance": 1e-8,
+  "witness_rtol": 5e-12,
+  "witness_atol": 5e-12,
+  "witness_topology_index": 0,
+  "witness_realizations": [0, 1],
+  "witness_local_groups": [0, 37, 74, 111],
+  "b2_moment_rtol": 1e-12,
+  "b2_moment_atol": 1e-12,
+  "empirical_moment_sigma": 5.0,
+  "empirical_moment_atol": 1e-12,
+  "b2_equality_sigma": 4.0
+ },
+ "resources": {
+  "internal_wall_cap_seconds": 7200,
+  "external_timeout_seconds": 7800,
+  "blas_threads": 1,
+  "packet_local_temp": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/temp",
+  "execution_marker": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/output/E10_shape_output.json.started",
+  "refuse_existing_pycache": true
+ }
+}

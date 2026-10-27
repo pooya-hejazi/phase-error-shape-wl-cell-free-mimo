@@ -1,0 +1,12 @@
+# R2C01_DIRA_SHAPE_v08 environment lock
+# Generated 2026-10-25T14:15:00Z; environment reused from v02 and re-verified
+# Python 3.12.10 / Windows-11-10.0.26200-SP0 / cp312 win_amd64
+# Install from the repository root:
+# .venv\Scripts\python.exe -m pip install --no-index --find-links .venv\wheels --require-hashes -r docs\claude_review\R2C01_DIRA_SHAPE_v08\run\requirements.lock
+
+numpy==2.5.2 \
+    --hash=sha256:28ac63476ec7651484215ee7fa15a1f78b57c14621f01e392afe17b9a1390ce4
+scipy==1.18.1 \
+    --hash=sha256:5e4d44984abc0020154ea81b247adeddcc3ac5527b975ff798bd1ba0adc513c2
+PyYAML==6.0.3 \
+    --hash=sha256:5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b

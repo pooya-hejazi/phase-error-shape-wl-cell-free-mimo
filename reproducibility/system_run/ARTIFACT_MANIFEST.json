@@ -1,0 +1,88 @@
+{
+  "identity": "R2C01_DIRA_SHAPE_REP_v01",
+  "evidence_role": "CONFIRMATORY_REPLICATION_OF_THE_PRIMARY_SHAPE_EFFECT",
+  "status": "FROZEN_WAITING_FOR_EXECUTION",
+  "packet": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01",
+  "inputs_checksum": {
+    "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/E10_shape_inputs.sha256",
+    "sha256": "0f300a2c722d26d5b1463e94fa09b9c4efbf3bc07b428507ab487736b93d4b11",
+    "entries": 23
+  },
+  "files": [
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/AUTHORIZATIONS.md",
+      "bytes": 1142,
+      "sha256": "dd1614b3fd15142a8b7b8a3dc49f0e59df9c7d88321fe6a912d204d1dfd742f9"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/E10_shape_config.json",
+      "bytes": 4952,
+      "sha256": "189bbbfe2dea3a83758a3af64a5c712112cac2567e21588239102d1d349ad4c1"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/E10_shape_inputs.sha256",
+      "bytes": 2641,
+      "sha256": "0f300a2c722d26d5b1463e94fa09b9c4efbf3bc07b428507ab487736b93d4b11"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/E10_shape_run.py",
+      "bytes": 56951,
+      "sha256": "49649fe56bc43f08d0eec19f81e05cfed62386709db461e459b87bfd49b48726"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/ENVIRONMENT_LOCK.json",
+      "bytes": 3006,
+      "sha256": "4f5523324c194c38aba9abc6b85d4743cd6b1ac59166a2099c360eedcbfc51ce"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/requirements.lock",
+      "bytes": 675,
+      "sha256": "20731115a5dbee1257eaac13cd360331a56dd28b70f847784eb7c6a14389e4a6"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_core.py",
+      "bytes": 12179,
+      "sha256": "961cf76881abfa9ee0c578a125bfede77dfb7897e83accc0b665b3fe6d3328c2"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_estimators.py",
+      "bytes": 8516,
+      "sha256": "3c1b00ff98f9c449ca2a672cfc8e3bed6fc3a5d41325f92e006e80703fb0dead"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_model.py",
+      "bytes": 7620,
+      "sha256": "38d5099fe5aa918c380ed751a529d6aad59145028c0e65b203bed97b6c13b11f"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_ordering.py",
+      "bytes": 11483,
+      "sha256": "ddd6e097d978e43744538b3329e971092eec16b75658c6376184ec46a610b59d"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_rows.py",
+      "bytes": 7803,
+      "sha256": "ed592bbce008ffd96f373fc5e6e6ffdc399ed4548248bd10eff69f176566788b"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_run_support.py",
+      "bytes": 2679,
+      "sha256": "ec76cd95c0cf31f3fcf702779cebc2df6df632816ff8e2712014f00a4be8668f"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/shape_stats.py",
+      "bytes": 3835,
+      "sha256": "57388374ea6ce0f28e554c475d206726a72ce73033ebcd6e915d0635c9983ab9"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/SCOPE.md",
+      "bytes": 2768,
+      "sha256": "26743122b2b5d322ef27f22ef3e4bc2ff9eb3cf990f1a2a1993e750c5434b7b2"
+    },
+    {
+      "path": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/STATUS.md",
+      "bytes": 1180,
+      "sha256": "ac9fa17ee27b675f6a1661de5821d16abac37bfdaebde760353ce54ef6e2a4cf"
+    }
+  ]
+}

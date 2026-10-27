@@ -1,0 +1,83 @@
+{
+  "identity": "R2C01_DIRA_SHAPE_EXP_v02",
+  "evidence_role": "EXPANDED_SYSTEM_CAMPAIGN",
+  "status": "FROZEN_WAITING_FOR_EXECUTION",
+  "packet": "reproducibility/expanded_run_v02",
+  "inputs_checksum": {
+    "path": "reproducibility/expanded_run_v02/run/E10_shape_inputs.sha256",
+    "sha256": "1a290116692c13151316ec9407a9888a77dae309c0e628c0ef408d964e9de450",
+    "entries": 11
+  },
+  "files": [
+    {
+      "path": "reproducibility/expanded_run_v02/run/E10_shape_run.py",
+      "bytes": 58172,
+      "sha256": "9cae330e775eebe658386f933b43b287bcf7d485fa67106893bf4f0f3a0ce4be"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/E10_shape_config.json",
+      "bytes": 7738,
+      "sha256": "57ea73ed3e8c6bdeeca7cc7baa417a9db7c18ce68bc0b1b414c86eca6e6d15dc"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_core.py",
+      "bytes": 12179,
+      "sha256": "961cf76881abfa9ee0c578a125bfede77dfb7897e83accc0b665b3fe6d3328c2"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_model.py",
+      "bytes": 7995,
+      "sha256": "010d32148bccddbfb1ec3fc89e2521508ca1519b7380099c2c9053a63c5e92c1"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_estimators.py",
+      "bytes": 8516,
+      "sha256": "3c1b00ff98f9c449ca2a672cfc8e3bed6fc3a5d41325f92e006e80703fb0dead"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_stats.py",
+      "bytes": 3835,
+      "sha256": "57388374ea6ce0f28e554c475d206726a72ce73033ebcd6e915d0635c9983ab9"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_rows.py",
+      "bytes": 7803,
+      "sha256": "ed592bbce008ffd96f373fc5e6e6ffdc399ed4548248bd10eff69f176566788b"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_ordering.py",
+      "bytes": 11483,
+      "sha256": "ddd6e097d978e43744538b3329e971092eec16b75658c6376184ec46a610b59d"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/shape_run_support.py",
+      "bytes": 2679,
+      "sha256": "ec76cd95c0cf31f3fcf702779cebc2df6df632816ff8e2712014f00a4be8668f"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/ENVIRONMENT_LOCK.json",
+      "bytes": 3064,
+      "sha256": "4f2aeec40f61839d25589b8d752c66194e63194d294b11f1c27e401f960496f5"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/requirements.lock",
+      "bytes": 675,
+      "sha256": "20731115a5dbee1257eaac13cd360331a56dd28b70f847784eb7c6a14389e4a6"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/run/E10_shape_inputs.sha256",
+      "bytes": 1340,
+      "sha256": "1a290116692c13151316ec9407a9888a77dae309c0e628c0ef408d964e9de450"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/SCOPE.md",
+      "bytes": 1072,
+      "sha256": "cceea8b132c26bc202150cf64f07b916df51fd7174bcadc82a0b3b9a5b4f5d42"
+    },
+    {
+      "path": "reproducibility/expanded_run_v02/AUTHORIZATIONS.md",
+      "bytes": 242,
+      "sha256": "f64adabe76ebc39c8cc666e2087514acae9057c4df8d9e0f1e47eea89d0fce10"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+* text=auto
+*.ps1 text eol=crlf
+*.py text eol=lf
+*.tex text eol=lf
+*.bib text eol=lf
+*.csv text eol=lf
+*.yaml text eol=lf
+
+
+# R2C01_DIRA_SHAPE_v08 executed output: preserve the exact executed bytes.
+# The results provenance binds the SHA-256 of the working-tree file; text
+# normalization would change it on checkout, so these two paths are binary.
+docs/claude_review/R2C01_DIRA_SHAPE_v08/run/output/E10_shape_output.json -text
+docs/claude_review/R2C01_DIRA_SHAPE_v08/run/output/E10_shape_output.json.started -text

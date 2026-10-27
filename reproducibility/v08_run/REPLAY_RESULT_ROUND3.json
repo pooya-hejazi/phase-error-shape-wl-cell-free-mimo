@@ -1,0 +1,45 @@
+{
+  "started_utc": "2026-10-27T09:16:36Z",
+  "finished_utc": "2026-10-27T10:26:30Z",
+  "returncode": 0,
+  "stdout_tail": "{\"written\": true, \"identity\": \"R2C01_DIRA_SHAPE_v08\", \"status\": \"COMPLETE\", \"status_detail\": null, \"output\": \"docs/claude_review/R2C01_DIRA_SHAPE_v08/run/output/E10_shape_output.json\", \"output_sha256\": \"e83195679ba2108d6b4d065dd506a42ab060c3db33512566272d04386988aa5f\", \"ordering_label\": \"ORDER_CONFIRMED\", \"collapse_label\": \"COLLAPSE_CONSISTENT\", \"summaries\": 50, \"elapsed_seconds\": 4193.062000000002}\n",
+  "stderr_tail": "",
+  "created_paths": [
+    "C:\\Users\\p.hejazi\\Documents\\NewPaperProject\\repo\\src",
+    "C:\\Users\\p.hejazi\\Documents\\NewPaperProject\\repo\\docs\\claude_review\\R2C01_DIRA_SHAPE_v08"
+  ],
+  "comparison": {
+    "tolerance": 1e-12,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "max_relative_difference": 0.0,
+    "sections_compared": [
+      "b2_equality_checks",
+      "b2_moment_checks",
+      "collapse",
+      "config",
+      "draw_registry",
+      "empirical_moment_checks",
+      "equality_controls",
+      "evidence_role",
+      "identity",
+      "integrity_failures",
+      "interpretation_rules",
+      "labels",
+      "moment_unit_checks",
+      "ordering",
+      "records",
+      "status",
+      "status_detail",
+      "status_meaning",
+      "summaries",
+      "witness_checks"
+    ],
+    "records": 1600,
+    "reproduced": true
+  },
+  "fresh_output": {
+    "path": "reproducibility\\v08_run\\replay_output\\E10_shape_output.json",
+    "sha256": "e83195679ba2108d6b4d065dd506a42ab060c3db33512566272d04386988aa5f"
+  }
+}

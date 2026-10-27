@@ -1,0 +1,58 @@
+{
+ "identity": "R2C01_DIRA_SHAPE_REP_v01",
+ "evidence_role": "EXPLORATORY_NON_CONFIRMATORY",
+ "generated_utc": "2026-10-25T14:15:00Z",
+ "environment_reused_from_v02": true,
+ "platform": "Windows-11-10.0.26200-SP0",
+ "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+ "python_version": "3.12.10",
+ "python_implementation": "CPython",
+ "prefix": "C:\\Users\\p.hejazi\\Documents\\NewPaperProject\\repo\\.venv",
+ "prefix_is_project_local": true,
+ "install_source": "pip download --only-binary=:all: --dest .venv/wheels numpy==2.5.2 scipy==1.18.1 PyYAML==6.0.3; pip install --no-index --find-links .venv/wheels",
+ "packages": {
+  "numpy": {
+   "version": "2.5.2",
+   "wheel": ".venv\\wheels\\numpy-2.5.2-cp312-cp312-win_amd64.whl",
+   "wheel_bytes": 12464674,
+   "wheel_sha256": "28ac63476ec7651484215ee7fa15a1f78b57c14621f01e392afe17b9a1390ce4",
+   "record": ".venv\\Lib\\site-packages\\numpy-2.5.2.dist-info\\RECORD",
+   "record_sha256": "2893b77bf9671e20c794463a6ef3f8e8ca6b1685184844a1a47898fcca22ffca",
+   "record_bytes": 113357
+  },
+  "scipy": {
+   "version": "1.18.1",
+   "wheel": ".venv\\wheels\\scipy-1.18.1-cp312-cp312-win_amd64.whl",
+   "wheel_bytes": 36658278,
+   "wheel_sha256": "5e4d44984abc0020154ea81b247adeddcc3ac5527b975ff798bd1ba0adc513c2",
+   "record": ".venv\\Lib\\site-packages\\scipy-1.18.1.dist-info\\RECORD",
+   "record_sha256": "f8a2c9fa6b3a4e3244840ee41d6878c309e718903cb7bdc743bf96e8dd52b347",
+   "record_bytes": 211031
+  },
+  "PyYAML": {
+   "version": "6.0.3",
+   "wheel": ".venv\\wheels\\pyyaml-6.0.3-cp312-cp312-win_amd64.whl",
+   "wheel_bytes": 154003,
+   "wheel_sha256": "5fcd34e47f6e0b794d17de1b4ff496c00986e1c83f7ab2fb8fcfe9616ff7477b",
+   "record": ".venv\\Lib\\site-packages\\PyYAML-6.0.3.dist-info\\RECORD",
+   "record_sha256": "a4f5e3c4f889e126b1ee7e19286e708aa20cc70e6ea8cccb1d1c574573852313",
+   "record_bytes": 2780
+  }
+ },
+ "intended_blas_env": {
+  "OMP_NUM_THREADS": "1",
+  "OPENBLAS_NUM_THREADS": "1",
+  "MKL_NUM_THREADS": "1"
+ },
+ "bytecode_policy": "-B and PYTHONDONTWRITEBYTECODE=1; the driver refuses any non-empty run/__pycache__ or src/phase_graph_cme/__pycache__",
+ "temp_policy": "TEMP and TMP must be set to docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/temp; the driver refuses a path outside it",
+ "execution_marker": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/output/E10_shape_output.json.started",
+ "smoke_test": {
+  "command": "$env:PYTHONDONTWRITEBYTECODE='1'; .venv\\Scripts\\python.exe -B -c \"import numpy, scipy, yaml; print(numpy.__version__, scipy.__version__, yaml.__version__)\"",
+  "observed": "2.5.2 1.18.1 6.0.3",
+  "pass": true,
+  "reused_from_v02": true
+ },
+ "requirements_lock": "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/requirements.lock",
+ "note": "The wheel hashes pin the bytes; the RECORD hashes pin the installed file lists. The .venv directory itself is not committed. The environment was created for v02 and is reused; this lock re-verifies the same bytes for v08."
+}

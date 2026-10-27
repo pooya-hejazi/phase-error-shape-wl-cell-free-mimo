@@ -1,0 +1,208 @@
+{
+  "purpose": "exact original dependency set of the v08 packet, restored from the archived tree",
+  "source": "_archive/2026-10-26_public_cleanup/src/phase_graph_cme",
+  "files": [
+    {
+      "path": "vendor/phase_graph_cme/__init__.py",
+      "bytes": 784,
+      "sha256": "48231f16d6030c5d31ad23c8f40698d80595ce9a85ce8a9387b70c5a0f639c88"
+    },
+    {
+      "path": "vendor/phase_graph_cme/__main__.py",
+      "bytes": 80,
+      "sha256": "3d2438ae92f4746e9ffaa1f837b1fe803f6281091d1f31f8c95643716f257d9a"
+    },
+    {
+      "path": "vendor/phase_graph_cme/baseline_precision_e0.py",
+      "bytes": 39286,
+      "sha256": "cd9899a9068ded1182dd2f6cd4bec5dd676123902823ee2a7c38bd9893aa7154"
+    },
+    {
+      "path": "vendor/phase_graph_cme/baseline_precision_e0_centered.py",
+      "bytes": 87365,
+      "sha256": "bed1bf73df186178fd0d0138bdd7eeaa8dae43eeb700ff84afd0a31278bec41a"
+    },
+    {
+      "path": "vendor/phase_graph_cme/baseline_precision_e0_repair.py",
+      "bytes": 67217,
+      "sha256": "1991d6c40690893bc76ec9bef48187043ea1eacf9ccdc24ad29b6334f79b6b66"
+    },
+    {
+      "path": "vendor/phase_graph_cme/baseline_reproduction.py",
+      "bytes": 16241,
+      "sha256": "7760dc416b3b9a4c9e6401fd257d54ac4c2eefa7022bcc00d1bc505c784d255e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/baselines.py",
+      "bytes": 5906,
+      "sha256": "d08e9ad2e961778d36583ac6116764dd942a9371e6cfde7b2e70a83cdcf0e1fc"
+    },
+    {
+      "path": "vendor/phase_graph_cme/budget_router.py",
+      "bytes": 4337,
+      "sha256": "446db49e99ff20c7002ccdb048bcccdc20b7ba443a3ecefac19e74c098ac3b92"
+    },
+    {
+      "path": "vendor/phase_graph_cme/cli.py",
+      "bytes": 2596,
+      "sha256": "c160b04fb7b712efae81c9977a7e0e82efc3deb8808b0c403c931d0b1a020ac8"
+    },
+    {
+      "path": "vendor/phase_graph_cme/conditional_reference_v3.py",
+      "bytes": 2723,
+      "sha256": "256b1b1cac09dba0174490e1f9186481d2a98780bb41bab5a28d729a28b7349e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/config.py",
+      "bytes": 8580,
+      "sha256": "745ada8f1f965817f9e98995c506bd832b9cf15bbb49210137d565203aa2c65d"
+    },
+    {
+      "path": "vendor/phase_graph_cme/controller.py",
+      "bytes": 14448,
+      "sha256": "49960762ad2bdbf84af4300731e2c2335cc47f086f7b6942c6b6765392922ed8"
+    },
+    {
+      "path": "vendor/phase_graph_cme/controller_v3.py",
+      "bytes": 32954,
+      "sha256": "74f5e4eadaf272a5dd4fe4409ca0bffc807ebe22756b25e30757fb4634c4f914"
+    },
+    {
+      "path": "vendor/phase_graph_cme/development_batch.py",
+      "bytes": 9471,
+      "sha256": "77124b6263f37719b7b5d71539ce8fff06a67fcb4da2279a8b3440a8b48cf62e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/diagnostics.py",
+      "bytes": 2438,
+      "sha256": "c94366fa363cf7b9e147d1e5dde2a2456b5bd9f24feaf21c1d38b0e6343b944e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/experiment.py",
+      "bytes": 20395,
+      "sha256": "947cb6e31b8f8cba3815a7f96e8472a95d60e3986ffcd7520ef27048cdd95616"
+    },
+    {
+      "path": "vendor/phase_graph_cme/inference.py",
+      "bytes": 21211,
+      "sha256": "8f6946c2dae1882b43dc492c6b445d5b9c11677449142931a1e07a3622e7defe"
+    },
+    {
+      "path": "vendor/phase_graph_cme/mean_field_baseline.py",
+      "bytes": 9876,
+      "sha256": "e5e27c4ffddaeab8390c118096efe0cc1b1ef40b8063b891b9a798c93ceea965"
+    },
+    {
+      "path": "vendor/phase_graph_cme/metrics.py",
+      "bytes": 3174,
+      "sha256": "32d828dc74be2143fe52f485b34e939b3ea1bf72cf1a41b815dde373e2244a1e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/model.py",
+      "bytes": 5078,
+      "sha256": "df92977f49f60405fc75ab799dd8d1e04cba0d15be7f6932f313e888a1d29207"
+    },
+    {
+      "path": "vendor/phase_graph_cme/moments.py",
+      "bytes": 3005,
+      "sha256": "619166e2d66de47334e1f1f72d31839df749ac0687504a03cecdaaed0e7856b6"
+    },
+    {
+      "path": "vendor/phase_graph_cme/posterior.py",
+      "bytes": 2588,
+      "sha256": "cf2e67dcba0c1caf77dedf71084b9cfd9d0f72e376664fb01c09a8cfdd82cb9a"
+    },
+    {
+      "path": "vendor/phase_graph_cme/prelock_qualification.py",
+      "bytes": 60390,
+      "sha256": "0459aecde11831928fc687f9c444620439e016ccc3083f845440773eadf5320d"
+    },
+    {
+      "path": "vendor/phase_graph_cme/production_artifacts.py",
+      "bytes": 10171,
+      "sha256": "34058a7c9e77668cc2ce68877d8d7365be46d37c59239f4fcd609a8c990f233e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/production_config.py",
+      "bytes": 31175,
+      "sha256": "fb63c8de70b3aff982e64b832773510521a568c1e81261a73ee5498a20fd111d"
+    },
+    {
+      "path": "vendor/phase_graph_cme/production_registry.py",
+      "bytes": 29309,
+      "sha256": "0c147fc5e69d7e30f854b2591a4c0480cc9b1deda39ec2a45369cd3949a6bd1d"
+    },
+    {
+      "path": "vendor/phase_graph_cme/receivers.py",
+      "bytes": 1039,
+      "sha256": "f84624360a4d1f14751a9f42cb3ea49b822e50fbcff239281cfa725f32d96829"
+    },
+    {
+      "path": "vendor/phase_graph_cme/redesign_v2.py",
+      "bytes": 52673,
+      "sha256": "b7a15cd268cfaa18222d9afc8f4418b2c559fac3d90f756b6fea4ab9d4035db3"
+    },
+    {
+      "path": "vendor/phase_graph_cme/reference_runner.py",
+      "bytes": 18772,
+      "sha256": "2112e7c1964aeefb82052cf373a9476c97d8214abaa26e1c2441d175a151cb9f"
+    },
+    {
+      "path": "vendor/phase_graph_cme/scenario.py",
+      "bytes": 11475,
+      "sha256": "78cf8dcf3830957288175c9d8a3bf47258743bf19c403735001c25299b42fce2"
+    },
+    {
+      "path": "vendor/phase_graph_cme/small_reference_campaign.py",
+      "bytes": 25378,
+      "sha256": "44beba43ec1024d1bc877bd00d7d9a3581926d9856b02fd7d0dfc8794a725e64"
+    },
+    {
+      "path": "vendor/phase_graph_cme/strong_affine_screen.py",
+      "bytes": 88067,
+      "sha256": "f6b825b4fe3c3e8e8be804d7fef338cd0622552ede4419c3ec1cc56b05ab7a18"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b06_lifecycle.py",
+      "bytes": 12543,
+      "sha256": "dbcc736a3e5812e03119455f7256d78c060b57fa1232cbf3b7b72dd935895d44"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b06_runner.py",
+      "bytes": 22004,
+      "sha256": "3de5733158a4ead572c6eaf0e4d2022e8f3e37c6f28c83705703f4ccb6f24f32"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b06_statistics.py",
+      "bytes": 17223,
+      "sha256": "02485a3ab3be0bda1d339e7ac67f1bfee67bf7296a646c60a4c4a9038ea80cfd"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b_batch.py",
+      "bytes": 9734,
+      "sha256": "d3fbee5a2c0c044bca1897ba7c490bfb33fd70b49be7dc69ac3bc188325a18eb"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b_lifecycle.py",
+      "bytes": 9251,
+      "sha256": "172de4f069e3adccd111d739919c0a17d4e8205f44aece39616e733bb5014e12"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b_runner.py",
+      "bytes": 21724,
+      "sha256": "aeb9918529b990ce473e42136b7a7588f5f31b8fb6b03ed4f71890feabbd23af"
+    },
+    {
+      "path": "vendor/phase_graph_cme/t06b_statistics.py",
+      "bytes": 17098,
+      "sha256": "aa589bf0117c506d5545d0c4bb6dee4939688b0ec7905acc9c571c05ba421c3e"
+    },
+    {
+      "path": "vendor/phase_graph_cme/trace_io.py",
+      "bytes": 40196,
+      "sha256": "825fa0f6e356892d9903d8f595a305a3fc9e03da5bca66930457c13489b49635"
+    }
+  ],
+  "count": 40,
+  "note": "the files are copied byte for byte; no newer library is substituted"
+}
