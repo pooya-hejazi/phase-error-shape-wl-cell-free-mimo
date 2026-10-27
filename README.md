@@ -1,86 +1,95 @@
-# شکل خطای فاز در تخمین کانال Widely-Linear برای Cell-Free Massive MIMO
+# Phase-Error Shape in Widely-Linear Channel Estimation for Cell-Free Massive MIMO
 
-این مخزن، کد و داده‌های بازتولید نتایج مقاله‌ی زیر را در اختیار داوران و پژوهشگران قرار می‌دهد:
+Companion code and numerical data for the manuscript:
 
 > **Phase-Error Shape in Widely-Linear Channel Estimation for Cell-Free Massive MIMO**  
 > Pooya Hejazi and Masoud Sabaei  
 > Amirkabir University of Technology
 
-نسخه‌ی مقاله و فایل PDF آن در این مخزن قرار ندارد و از مسیر فرآیند داوری ژورنال در دسترس است. سیاست این مخزن این است که فقط **کد، پیکربندی و داده‌های عددی لازم برای بازتولید** در آن نگهداری شود.
+**Publication status:** the manuscript is under review and has not been published. The manuscript source and PDF are intentionally not included in this repository; this repository contains the code, configuration, and numerical outputs needed to inspect and reproduce the reported results.
 
 ---
 
-## درباره‌ی مقاله
+## Overview
 
-در سیستم‌های Cell-Free Massive MIMO، خطای فاز باقی‌مانده پس از ردیابی معمولاً فقط با اولین گشتاور دایره‌ای، یعنی
+Cell-free massive MIMO systems rely on line-of-sight phase tracking. The residual phase error is commonly summarized by its first circular moment,
 
 $$
-m_1 = \mathbb{E}[\cos\varepsilon],
+m_1 = \mathbb{E}[\cos\varepsilon].
 $$
 
-خلاصه می‌شود. مقاله نشان می‌دهد که این خلاصه برای تخمین کانال Widely-Linear (WL) کافی نیست؛ زیرا تخمین‌گر WL به دومین گشتاور دایره‌ای و شبه‌کوواریانس
+This paper shows that $m_1$ alone is insufficient for widely-linear (WL) channel estimation. The WL estimator also depends on the second circular moment through the pseudo-covariance
 
 $$
 c = m_2 - m_1^2,
 \qquad
-m_2 = \mathbb{E}[\cos 2\varepsilon],
+m_2 = \mathbb{E}[\cos 2\varepsilon].
 $$
 
-نیز وابسته است.
-
-در $m_1$ ثابت، مقدار $c$ یک درجه‌ی آزادی مستقل روی بازه‌ی زیر است:
+For a fixed $m_1$, the pseudo-covariance is a free coordinate in the interval
 
 $$
 -(1-m_1^2) \le c \le 1-m_1^2.
 $$
 
-تخمین‌گر complex-affine که در مقاله **B2** نامیده می‌شود فقط از $m_1$ استفاده می‌کند، در حالی که تخمین‌گر Widely-Linear یا **B1** از هر دو $m_1$ و $c$ استفاده می‌کند. بنابراین «شکل» توزیع خطای فاز، و نه فقط واریانس آن، روی بهره‌ی WL اثر می‌گذارد.
+The complex-affine estimator **B2** uses $m_1$ only, whereas the widely-linear estimator **B1** uses both $m_1$ and $c$. The repository provides the scalar phase-law analysis, the calibration study, the cell-free system experiments, and the post-hoc analyses reported in the manuscript.
 
 ---
 
-## نتایج کلیدی
+## Key Results
 
-- برای $0<m_1<1$ ثابت شده است که سه قانون فاز **Binary، Uniform و Wrapped Gaussian** از نظر $|c|$ و در نتیجه بهره‌ی WL اسکالر، ترتیب اکید دارند.
-- قانون **von Mises** به‌صورت عددی روی یک شبکه‌ی ۲۰٬۰۰۱ نقطه‌ای بررسی شده و ادعای قضیه برای آن مطرح نمی‌شود.
-- یک پنجره‌ی کالیبراسیون به‌ازای هر زنجیره‌ی RF پیشنهاد شده است. روی قوانین فاز اعلام‌شده:
-  - در $M=1024$، نسبت بهره‌ی حفظ‌شده برای B/U/G برابر است با حدود **0.984 / 0.966 / 0.961**.
-  - نقطه‌ی عبور ۹۹٪ برای B/U/G برابر است با حدود **2,216 / 4,141 / 3,898** فریم.
-  - این اعداد تخمین‌های Monte Carlo هستند و تضمین عملیاتی محسوب نمی‌شوند.
-- در سه اجرای مستقل Cell-Free با pilot reuse و RZF، اندازه‌ی اثر شکل فاز برابر است با **2.1196، 2.2079 و 2.0814** و ترتیب کامل در هر ۶۴ topology برقرار است.
-- تحلیل pooled برای حالت collapse مقدار **1.0590** با بازه‌ی bootstrap برابر **[1.0348, 1.0861]** به دست می‌دهد.
-- مطالعه‌ی downlink فقط برای **Maximum-Ratio precoding** انجام شده و ترتیب کامل downlink ادعا نمی‌شود.
+- For $0<m_1<1$, the Binary, Uniform, and Wrapped-Gaussian phase laws have a strict scalar ordering in $|c|$, and therefore in the WL gain.
+- The von Mises comparison is numerical over a 20,001-point grid; it is not presented as an analytic theorem.
+- For the declared phase laws, the calibration experiment gives:
+  - captured gain at $M=1024$: approximately **0.984 / 0.966 / 0.961** for B/U/G;
+  - interpolated 99% crossings: approximately **2,216 / 4,141 / 3,898** frames;
+  - these values are Monte Carlo estimates, not operational guarantees.
+- In three independent cell-free uplink draws with pilot reuse and RZF, the shape-effect estimates are **2.1196**, **2.2079**, and **2.0814**, with the full order in all 64 topologies.
+- The pooled collapse estimate is **1.0590** with a 95% bootstrap interval of **[1.0348, 1.0861]**.
+- The downlink study is limited to maximum-ratio precoding; a full downlink ordering is not claimed.
 
 ---
 
-## ساختار مخزن
+## Repository Layout
 
 ```text
 analysis/
-  phase_laws.py                  # قوانین فاز، لنز feasible و بررسی vM
-  calibration.py                 # محاسبات پایه‌ی calibration و MSE
-  calibration_law.py             # Monte Carlo روی قوانین واقعی فاز
+  phase_laws.py                  # phase laws, feasible lens, vM numerical check
+  calibration.py                 # baseline calibration, MSE, and risk utilities
+  calibration_law.py             # Monte Carlo calibration on the actual phase laws
   requirements.txt
   results/
-    cp1_phase_laws.json          # خروجی بررسی قوانین و ترتیب
-    cp2_calibration_law.json     # خروجی کالیبراسیون، capture و M*
+    cp1_phase_laws.json          # phase-law ordering and feasible-set results
+    cp2_calibration_law.json     # capture curves, covariance, bias, M*
 
 reproducibility/
-  system_run/                    # اجرای اصلی frozen و داده‌های مرجع
-  expanded_run_v02/              # اجرای گسترده‌شده: kappa و sensitivity
-  v08_run/                       # بسته‌ی v08، replay و vendor code
-  standard_channel/              # بررسی کانال استاندارد 3GPP UMa
-  downlink/                      # بررسی downlink با MR precoding
-  pooled_collapse.py             # تحلیل pooled سه اجرای مستقل
+  v08_run/                       # frozen v08 packet, replay, and vendored code
+  system_run/                    # frozen replication packet and analyses
+  expanded_run_v02/              # expanded campaign: kappa and c-sensitivity
+  standard_channel/              # 3GPP UMa standard-channel study
+  downlink/                      # downlink MR-precoding study
+  pooled_collapse.py             # post-hoc pooled analysis
   pooled_collapse.json
 ```
 
-فایل‌های `ENVIRONMENT_LOCK.json`، `requirements.lock`، پیکربندی‌ها، checksumها و manifestها برای حفظ provenance هر بسته در مخزن نگه داشته شده‌اند.
+Each frozen packet retains its configuration, environment lock, checksums, and manifest for provenance. Scientific outputs are stored as JSON so that reviewers can inspect them without rerunning the original experiments.
 
 ---
 
-## نصب محیط
+## Requirements
 
-Python 3.12 توصیه می‌شود.
+The analyses were produced with:
+
+```text
+Python 3.12
+numpy  2.5.2
+scipy  1.18.1
+PyYAML 6.0.3
+```
+
+The scalar scripts use the packages listed in `analysis/requirements.txt`. The frozen packets include their own environment locks.
+
+All commands below must be run **from the repository root**.
 
 ### Windows
 
@@ -98,50 +107,45 @@ source .venv/bin/activate
 python -m pip install -r analysis/requirements.txt
 ```
 
-بسته‌های frozen از نسخه‌های مشخص‌شده در `requirements.lock` استفاده می‌کنند. نسخه‌های مرجع عبارت‌اند از:
+---
 
-```text
-Python 3.12
-numpy  2.5.2
-scipy  1.18.1
-PyYAML 6.0.3
+## Quick Review Path
+
+These commands regenerate and verify the main scalar results in about one minute, depending on hardware:
+
+```bash
+python -B analysis/phase_laws.py
+python -B analysis/calibration_law.py
+python -B reproducibility/pooled_collapse.py
 ```
+
+Expected outcomes:
+
+- `analysis/phase_laws.py` writes `analysis/results/cp1_phase_laws.json` and prints the phase-law ordering checks.
+- `analysis/calibration_law.py` writes `analysis/results/cp2_calibration_law.json` and prints capture, bias, projection, and $M^\star$ values for each law.
+- `reproducibility/pooled_collapse.py` reads the three stored system outputs and writes `reproducibility/pooled_collapse.json`.
+
+The calibration script uses deterministic SHA-256-derived seeds. Re-running it should produce byte-identical JSON.
 
 ---
 
-## نحوه‌ی اجرا و دریافت خروجی‌ها
+## Detailed Reproduction Workflow
 
-همه‌ی دستورها باید **از ریشه‌ی مخزن** اجرا شوند؛ یعنی پوشه‌ای که `README.md` و پوشه‌های `analysis/` و `reproducibility/` در آن قرار دارند.
-
-پس از فعال‌سازی محیط مجازی، در Windows استفاده از مسیر صریح مفسر نیز مجاز است:
-
-```powershell
-.venv\Scripts\python.exe -B <script.py>
-```
-
-در Linux یا macOS:
-
-```bash
-python -B <script.py>
-```
-
-### گام ۱: اجرای محاسبات اسکالر
+### Step 1: Scalar phase-law and calibration analyses
 
 ```bash
 python -B analysis/phase_laws.py
 python -B analysis/calibration_law.py
 ```
 
-این دو دستور خروجی‌های زیر را می‌سازند یا بازنویسی می‌کنند:
+| Command | Reads | Writes | Terminal output |
+|---|---|---|---|
+| `analysis/phase_laws.py` | Closed-form phase-law definitions | `analysis/results/cp1_phase_laws.json` | Ordering, sinc inequality, and von Mises grid checks |
+| `analysis/calibration_law.py` | Actual phase-law generators and proper noise | `analysis/results/cp2_calibration_law.json` | Capture, standard error, bias, projection fraction, and $M^\star$ |
 
-| دستور | خروجی فایل | خروجی ترمینال |
-|---|---|---|
-| `analysis/phase_laws.py` | `analysis/results/cp1_phase_laws.json` | نتیجه‌ی ترتیب قوانین، بررسی sinc و مقایسه‌ی vM |
-| `analysis/calibration_law.py` | `analysis/results/cp2_calibration_law.json` | capture، خطا، bias، projection و $M^\star$ برای هر قانون |
+`calibration_law.py` performs the 2,000-replicate Monte Carlo calibration. It is the heaviest scalar computation but normally completes in tens of seconds.
 
-`calibration_law.py` از seedهای پایدار مشتق‌شده از SHA-256 استفاده می‌کند. اجرای دوباره‌ی آن باید JSON یکسان و byte-identical تولید کند. این اسکریپت چند ده ثانیه زمان می‌برد و سنگین‌ترین بخش آن Monte Carlo با ۲۰۰۰ replicate برای هر قانون و هر طول پنجره است.
-
-### گام ۲: تحلیل خروجی‌های frozen
+### Step 2: Analyze the frozen system outputs
 
 ```bash
 python -B reproducibility/expanded_run_v02/analyze_expanded.py
@@ -149,40 +153,42 @@ python -B reproducibility/system_run/analyze_replication.py
 python -B reproducibility/system_run/robustness_replication.py
 ```
 
-| دستور | ورودی | خروجی |
-|---|---|---|
-| `analyze_expanded.py` | `expanded_run_v02/output/E10_shape_output.json` | فایل `expanded_run_v02/output/expanded_analysis.json` و گزارش اثرها در ترمینال |
-| `system_run/analyze_replication.py` | `system_run/output/E10_shape_output.json` | فقط گزارش ordering، collapse، controls و اثرها در ترمینال |
-| `system_run/robustness_replication.py` | `system_run/output/E10_shape_output.json` | فقط SE، توان، MDD، jackknife و تحلیل حساسیت در ترمینال |
+| Command | Reads | Writes | Terminal output |
+|---|---|---|---|
+| `expanded_run_v02/analyze_expanded.py` | `expanded_run_v02/output/E10_shape_output.json` | `expanded_run_v02/output/expanded_analysis.json` | Block effects and controls |
+| `system_run/analyze_replication.py` | `system_run/output/E10_shape_output.json` | No file | Ordering, collapse, controls, and paired contrasts |
+| `system_run/robustness_replication.py` | `system_run/output/E10_shape_output.json` | No file | Standard errors, power, MDD, jackknife, and distance to the collapse threshold |
 
-دو اسکریپت `system_run` فایلی نمی‌سازند. اگر می‌خواهید خروجی ترمینال آن‌ها را ذخیره کنید:
+To retain the terminal-only reports:
 
 ```powershell
 python -B reproducibility/system_run/analyze_replication.py | Tee-Object -FilePath replication_report.txt
 python -B reproducibility/system_run/robustness_replication.py | Tee-Object -FilePath robustness_report.txt
 ```
 
-### گام ۳: بازتولید downlink و کانال استاندارد
+On Linux or macOS, use `tee` instead of `Tee-Object`.
+
+### Step 3: Downlink and standard-channel studies
 
 ```bash
 python -B reproducibility/downlink/run_downlink.py
 python -B reproducibility/standard_channel/run_standard.py
 ```
 
-| دستور | خروجی فایل | نکته |
+| Command | Writes | Main contents |
 |---|---|---|
-| `downlink/run_downlink.py` | `reproducibility/downlink/results.json` | شامل deterministic self-test، میانگین SE، بازه‌های paired و تعداد topologyهای مثبت |
-| `standard_channel/run_standard.py` | `reproducibility/standard_channel/results.json` | شامل دو variant کانال UMa و بررسی‌های validation |
+| `downlink/run_downlink.py` | `reproducibility/downlink/results.json` | Deterministic self-test, mean SE, paired intervals, and positive-topology counts |
+| `standard_channel/run_standard.py` | `reproducibility/standard_channel/results.json` | Both UMa variants, ordering counts, and validation checks |
 
-اجرای downlink معمولاً حدود یک دقیقه و اجرای standard-channel چند دقیقه زمان می‌برد. این زمان‌ها به سخت‌افزار وابسته‌اند.
+The downlink run normally takes about one minute. The standard-channel run takes several minutes; both depend on hardware.
 
-### گام ۴: تحلیل pooled
+### Step 4: Pooled analysis
 
 ```bash
 python -B reproducibility/pooled_collapse.py
 ```
 
-این دستور سه فایل زیر را می‌خواند:
+This script reads:
 
 ```text
 reproducibility/v08_run/run/output/E10_shape_output.json
@@ -190,7 +196,9 @@ reproducibility/system_run/output/E10_shape_output.json
 reproducibility/expanded_run_v02/output/E10_shape_output.json
 ```
 
-و نتیجه را در `reproducibility/pooled_collapse.json` می‌نویسد. مقادیر مرجع عبارت‌اند از:
+and writes `reproducibility/pooled_collapse.json`.
+
+Reference values:
 
 ```text
 M090: pooled_effect = 2.1372452505
@@ -199,30 +207,32 @@ M099: pooled_effect = 1.0589764846
       interval      = [1.0347764372, 1.0861185945]
 ```
 
-### گام ۵: مشاهده‌ی یک خروجی JSON
+### Step 5: Inspect a JSON result
 
-برای چاپ مرتب یک فایل JSON:
+To print a formatted JSON file:
 
 ```bash
 python -B -c "import json; p='analysis/results/cp2_calibration_law.json'; print(json.dumps(json.load(open(p, encoding='utf-8')), indent=2, ensure_ascii=False))"
 ```
 
-برای دیدن مستقیم بخش خلاصه‌ی کالیبراسیون:
+To print only the calibration summary:
 
 ```bash
 python -B -c "import json; d=json.load(open('analysis/results/cp2_calibration_law.json', encoding='utf-8')); print(json.dumps(d['summary'], indent=2))"
 ```
 
-اگر `jq` نصب باشد، نمونه‌های کوتاه‌تر نیز قابل استفاده‌اند:
+If `jq` is installed:
 
 ```bash
 jq '.summary' analysis/results/cp2_calibration_law.json
 jq '.M099.pooled_effect, .M099.pooled_interval' reproducibility/pooled_collapse.json
 ```
 
-### چه فایل‌هایی بازنویسی می‌شوند؟
+---
 
-اجرای دستورهای بالا فقط خروجی‌های تحلیلی زیر را بازنویسی می‌کند:
+## Files Overwritten by the Analysis Scripts
+
+The reviewer workflow overwrites only these derived outputs:
 
 - `analysis/results/cp1_phase_laws.json`
 - `analysis/results/cp2_calibration_law.json`
@@ -231,28 +241,9 @@ jq '.M099.pooled_effect, .M099.pooled_interval' reproducibility/pooled_collapse.
 - `reproducibility/standard_channel/results.json`
 - `reproducibility/pooled_collapse.json`
 
-فایل‌های `E10_shape_output.json` خروجی‌های علمی frozen هستند و دستورهای بالا آن‌ها را بازنویسی نمی‌کنند. اسکریپت `run/E10_shape_run.py` را اجرا نکنید؛ آن اسکریپت driver اصلی اجرای frozen است، نه تحلیل خروجی.
+The files named `E10_shape_output.json` are frozen scientific outputs. The analysis commands above do not overwrite them.
 
----
-
-## بازاجرای کامل v08
-
-بازاجرای کامل بسته‌ی v08 با دستور زیر انجام می‌شود:
-
-```bash
-python -B reproducibility/v08_run/replay.py
-```
-
-این replay تقریباً ۷۰ دقیقه زمان می‌برد. مسیرهای تازه را فقط در محدوده‌ی کنترل‌شده می‌سازد، در صورت وجود `src/` از شروع امتناع می‌کند و فقط مسیرهایی را حذف می‌کند که خودش ایجاد کرده است.
-
-خروجی‌های replay:
-
-| مسیر | محتوا |
-|---|---|
-| `reproducibility/v08_run/replay_output/E10_shape_output.json` | خروجی تازه‌ی replay برای مقایسه |
-| `reproducibility/v08_run/REPLAY_RESULT_ROUND3.json` | گزارش مقایسه‌ی ۲۰ بخش علمی، تعداد recordها و mismatchها |
-
-دستور زیر را برای بسته‌های frozen اجرا نکنید:
+Do **not** run the frozen experiment drivers as part of a normal review:
 
 ```text
 reproducibility/v08_run/run/E10_shape_run.py
@@ -260,50 +251,61 @@ reproducibility/system_run/E10_shape_run.py
 reproducibility/expanded_run_v02/run/E10_shape_run.py
 ```
 
-این فایل‌ها driverهای اصلی آزمایش هستند و اجرای مجدد آن‌ها بخشی از رویه‌ی تحلیل معمول نیست.
+They are the original experiment drivers, not analysis scripts.
 
 ---
 
-## داده‌های مرجع
+## Full v08 Replay
 
-| فایل | محتوا |
-|---|---|
-| `analysis/results/cp1_phase_laws.json` | بررسی تحلیلی و عددی ترتیب قوانین فاز |
-| `analysis/results/cp2_calibration_law.json` | capture، covariance، bias، projection و $M^\star$ |
-| `reproducibility/system_run/output/E10_shape_output.json` | اجرای اصلی frozen |
-| `reproducibility/expanded_run_v02/output/E10_shape_output.json` | اجرای expanded و sensitivity |
-| `reproducibility/pooled_collapse.json` | تحلیل pooled سه draw |
-| `reproducibility/downlink/results.json` | نتایج downlink و deterministic self-test |
-| `reproducibility/standard_channel/results.json` | نتایج کانال استاندارد UMa |
+The complete v08 replay is available but is not required for the quick review path:
 
----
-
-## دامنه و محدودیت‌ها
-
-برای جلوگیری از تفسیر بیش از حد نتایج، نکات زیر بخشی از دامنه‌ی ادعاهای مقاله هستند:
-
-- ترتیب تحلیلی B/U/G برای $0<m_1<1$ اثبات شده است؛ ترتیب von Mises فقط عددی و روی شبکه‌ی محدود بررسی شده است.
-- نتایج Cell-Free سنتزی هستند و ادعای اندازه‌گیری سخت‌افزاری یا multi-site وجود ندارد.
-- بسته‌های expanded، خطای فرضی $c$ را تزریق می‌کنند و یک بررسی sensitivity هستند، نه اعتبارسنجی یک tracker حلقه‌بسته.
-- کالیبراسیون اسکالر یک کران و تحلیل Monte Carlo است و پنجره‌ی به‌دست‌آمده تضمین عملیاتی عمومی نیست.
-- قانون Binary یک حالت مرزی است و بخش قابل‌توجهی از پنجره‌های آن روی مرز feasible projection می‌شود.
-- بررسی downlink فقط برای MR precoding است؛ بازه‌های paired ترتیب کامل را resolve نمی‌کنند.
-- کانال standard-channel به‌صورت frequency-flat مدل شده و delay dispersion ندارد.
-
----
-
-## استناد
-
-اگر از این کد یا داده‌ها در پژوهش خود استفاده می‌کنید، لطفاً به مقاله‌ی زیر ارجاع دهید:
-
-```bibtex
-@article{hejazi2026phase,
-  author  = {Pooya Hejazi and Masoud Sabaei},
-  title   = {Phase-Error Shape in Widely-Linear Channel Estimation for Cell-Free Massive MIMO},
-  journal = {IEEE Transactions on Wireless Communications},
-  year    = {2026},
-  note    = {Manuscript}
-}
+```bash
+python -B reproducibility/v08_run/replay.py
 ```
 
-اطلاعات نهایی جلد، شماره و DOI پس از انتشار به‌روزرسانی خواهد شد.
+On the original hardware, the replay took approximately 70 minutes. It reconstructs the historical directory layout, refuses to start if an unrelated `src/` directory exists, and removes only the paths it created. The comparison covers 20 scientific sections and 1,600 records at a relative tolerance of `1e-12`.
+
+Replay outputs:
+
+| Path | Contents |
+|---|---|
+| `reproducibility/v08_run/replay_output/E10_shape_output.json` | Fresh replay output retained for comparison |
+| `reproducibility/v08_run/REPLAY_RESULT_ROUND3.json` | Section list, record count, SHA-256, and mismatch report |
+
+---
+
+## Reference Data
+
+| File | Contents |
+|---|---|
+| `analysis/results/cp1_phase_laws.json` | Analytic and numerical phase-law ordering results |
+| `analysis/results/cp2_calibration_law.json` | Capture curves, joint covariance, bias, projection, and $M^\star$ |
+| `reproducibility/v08_run/run/output/E10_shape_output.json` | Frozen primary v08 output |
+| `reproducibility/system_run/output/E10_shape_output.json` | Frozen replication output |
+| `reproducibility/expanded_run_v02/output/E10_shape_output.json` | Frozen expanded and sensitivity output |
+| `reproducibility/pooled_collapse.json` | Pooled analysis of the three draws |
+| `reproducibility/downlink/results.json` | Downlink results and deterministic self-test |
+| `reproducibility/standard_channel/results.json` | 3GPP UMa standard-channel results |
+
+---
+
+## Scope and Limitations
+
+The following qualifications are part of the manuscript's claims:
+
+- The B/U/G ordering is analytic for $0<m_1<1$. The von Mises ordering is numerical over a finite grid.
+- The cell-free results are from a synthetic channel model, not a hardware testbed or multi-site measurement.
+- The expanded calibration cells are $c$-only sensitivity checks. They do not validate a closed-loop tracker.
+- The scalar calibration result combines a conditional theorem with Monte Carlo; the estimated window is not a universal operational guarantee.
+- The binary law is a boundary case, and a substantial fraction of its calibration windows are projected onto the feasible boundary.
+- The downlink study uses maximum-ratio precoding only. The paired intervals do not resolve the full downlink ordering.
+- The standard-channel study is frequency-flat and does not model delay dispersion.
+
+---
+
+## Contact
+
+Questions about the code or data can be directed to the authors:
+
+- Pooya Hejazi — `pooya.hejazi@aut.ac.ir`
+- Masoud Sabaei — `sabaei@aut.ac.ir`
