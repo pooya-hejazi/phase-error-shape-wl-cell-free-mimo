@@ -4,7 +4,7 @@ Reads the frozen output and reports, for each block, the per-topology MSE ratios
 the ordering counts, the effect size with a bootstrap interval, the calibration
 capture, and the control status.
 
-    .venv\\Scripts\\python.exe -B reproducibility\\expanded_run\\analyze_expanded.py
+    python -B reproducibility/expanded_run_v02/analyze_expanded.py
 """
 
 from __future__ import annotations

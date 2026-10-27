@@ -3,6 +3,9 @@
 Reads the R2C01_DIRA_SHAPE_REP_v01 output. Prints the paired-difference SE, the 80%-power MDD,
 the effect-size interval, the collapse margin and the leave-one-out / summary sensitivity.
 Writes nothing.
+
+Run from the repository root:
+    python -B reproducibility/system_run/robustness_replication.py
 """
 
 from __future__ import annotations
@@ -14,8 +17,8 @@ from pathlib import Path
 
 from scipy.stats import norm
 
-ROOT = Path(__file__).resolve().parents[3]
-OUT = ROOT / "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/output/E10_shape_output.json"
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "output/E10_shape_output.json"
 Z_ALPHA = float(norm.ppf(1.0 - 0.05 / 3.0 / 2.0))
 Z_95 = float(norm.ppf(0.975))
 Z_POWER = float(norm.ppf(0.80))

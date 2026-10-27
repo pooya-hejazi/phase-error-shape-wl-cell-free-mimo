@@ -4,9 +4,7 @@ Reads the replication output and prints the primary ordering, collapse, controls
 per-topology / jackknife robustness. It does not run the diagnostic and writes nothing.
 
 Run from the repository root:
-    $env:PYTHONDONTWRITEBYTECODE="1"
-    .venv\\Scripts\\python.exe -B docs\\claude_review\\R2C01_DIRA_SHAPE_REP_v01\\analyze_replication.py
-    Remove-Item Env:\\PYTHONDONTWRITEBYTECODE
+    python -B reproducibility/system_run/analyze_replication.py
 """
 
 from __future__ import annotations
@@ -15,9 +13,9 @@ import json
 import statistics
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
-REP = ROOT / "docs/claude_review/R2C01_DIRA_SHAPE_REP_v01/run/output/E10_shape_output.json"
-V08 = ROOT / "docs/claude_review/R2C01_DIRA_SHAPE_v08/run/output/E10_shape_output.json"
+HERE = Path(__file__).resolve().parent
+REP = HERE / "output/E10_shape_output.json"
+V08 = HERE.parent / "v08_run/run/output/E10_shape_output.json"
 
 
 def ratios(records: list[dict], cell: str) -> dict[int, float]:
