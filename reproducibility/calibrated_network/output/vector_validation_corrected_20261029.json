@@ -1,0 +1,14 @@
+{
+  "seed": 20261115,
+  "augmented_min_eigenvalue": 0.15211260576142646,
+  "augmented_psd": true,
+  "c0_reduction_gap": 0.0,
+  "phase_equivariance_error": 1.1660645525601868e-15,
+  "vector_shape": [
+    2,
+    2
+  ],
+  "covariance_hermitian_error": 4.100719763755477e-18,
+  "pseudo_symmetry_error": 0.0,
+  "scope": "algebraic checks only; actual-phase Monte Carlo risk is tested separately in check_theory.py"
+}

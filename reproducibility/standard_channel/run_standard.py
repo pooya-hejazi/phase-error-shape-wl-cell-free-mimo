@@ -1,9 +1,12 @@
-"""Primary-cell experiment on a 3GPP TR 38.901 UMa channel.
+"""Primary-cell sensitivity experiment with UMa-inspired channel ingredients.
 
 The base experiment uses a power-law pathloss and an exponential spatial correlation. This script
-replaces both with standard ingredients: the UMa pathloss and LoS probability of TR 38.901, log-normal
+replaces both with selected ingredients: single-slope pathloss and UMa LoS probability, log-normal
 shadowing, and a Laplacian power angular spectrum on a half-wavelength ULA. The estimator, the pilot
 model, the phase laws and the metric are unchanged.
+
+The pathloss omits the LoS breakpoint and the NLoS max-with-LoS operation;
+this is not a complete TR 38.901/CDL channel. Path gains are median-normalized.
 
 Two variants are run:
   (a) all links are LoS with kappa = 20, so the result is directly comparable with the base design;
@@ -50,7 +53,7 @@ BASE_SEED = 202610290001
 
 
 def uma_pathloss_db(distance_2d: np.ndarray, los: np.ndarray) -> np.ndarray:
-    """TR 38.901 UMa pathloss in dB for fc = 3.5 GHz and h_AP = 25 m."""
+    """Single-slope UMa-inspired pathloss, without breakpoint/NLoS max correction."""
 
     d3d = np.sqrt(distance_2d**2 + (H_AP - H_UT) ** 2)
     d3d = np.maximum(d3d, 10.0)

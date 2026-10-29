@@ -2,18 +2,19 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import numpy as np
 
 from run_calibrated_network import (
     LAWS, ESTIMATORS, ScenarioConfig, generate_topology, calibrate, make_frame,
-    true_moments, estimate, rzf_combiner, uatf,
+    true_moments, estimate, rzf_combiner, uatf, calibrate_chains,
 )
 
 M1 = 0.90
 TOPOLOGIES = 8
-REALIZATIONS = 4
+REALIZATIONS = 64
 
 
 def config_for_experiment():
@@ -27,7 +28,7 @@ def config_for_experiment():
 
 def evaluate(config, topology, law: str, ma: float, ca: float, wl: bool, seed_base: int,
              shared: bool):
-    errs, se_users, energies = [], [], []
+    errs, channels, combiners, energies = [], [], [], []
     for r in range(REALIZATIONS):
         truth, obs = make_frame(topology, config, law, seed_base + 7919 * r, shared=shared)
         est = estimate(truth, obs, topology, config, ma, ca, wl=wl)
@@ -35,11 +36,13 @@ def evaluate(config, topology, law: str, ma: float, ca: float, wl: bool, seed_ba
         energies.append(float(np.sum(np.abs(truth) ** 2)))
         h = truth.reshape((config.access_points * config.antennas_per_ap, config.users))
         e = est.reshape((config.access_points * config.antennas_per_ap, config.users))
-        se_users.append(uatf(h, rzf_combiner(e, 1.0), config))
+        channels.append(h)
+        combiners.append(rzf_combiner(e, 1.0))
+    se_users = uatf(np.asarray(channels), np.asarray(combiners), config)
     return {
         "mse": float(np.mean(errs)),
         "nmse": float(np.mean(errs) / np.mean(energies)),
-        "se_per_user": np.mean(se_users, axis=0).tolist(),
+        "se_per_user": se_users.tolist(),
         "se_mean": float(np.mean(se_users)),
     }
 
@@ -61,7 +64,7 @@ def main() -> None:
             gain, ratio = [], []
             for t in range(TOPOLOGIES):
                 topology = generate_topology(config, seed=202611210000 + t)
-                m1c, cc = calibrate(law, 1024, 202612220000 + 97 * t)
+                m1c, cc = calibrate_chains(law, 1024, 202612220000 + 97 * t, config.access_points)
                 b1 = evaluate(config, topology, law, m1c, cc, True, 202613230000 + 17 * t, shared)
                 b2 = evaluate(config, topology, law, m1c, 0.0, False, 202613230000 + 17 * t, shared)
                 gain.append(b1["se_mean"] - b2["se_mean"])
@@ -83,7 +86,7 @@ def main() -> None:
         gains, ratios = [], []
         for t in range(TOPOLOGIES):
             topology = generate_topology(config, seed=202611240000 + t)
-            m1c, cc = calibrate(ref, 1024, 202612250000 + 97 * t)
+            m1c, cc = calibrate_chains(ref, 1024, 202612250000 + 97 * t, config.access_points)
             b1 = evaluate(config, topology, data_law, m1c, cc, True, 202613260000 + 17 * t, False)
             oracle_b2 = evaluate(config, topology, data_law, m1, 0.0, False,
                                  202613260000 + 17 * t, False)
@@ -101,23 +104,22 @@ def main() -> None:
     operational = []
     for law in LAWS:
         for m in (64, 256, 1024, 4096):
+            vals = {est: [] for est in ("cal_B1", "cal_B2")}
+            for t in range(TOPOLOGIES):
+                topology = generate_topology(config, seed=202611270000 + t)
+                m1c, cc = calibrate_chains(law, m, 202612280000 + 97 * t + m, config.access_points)
+                for est in vals:
+                    result = evaluate(config, topology, law, m1c, cc if est == "cal_B1" else 0.0,
+                                      est == "cal_B1", 202613290000 + 17 * t, False)
+                    vals[est].append(result["se_mean"])
             for horizon in (32, 128, 512):
-                m1, m2 = true_moments(law)
-                vals = {est: [] for est in ("cal_B1", "cal_B2")}
-                for t in range(TOPOLOGIES):
-                    topology = generate_topology(config, seed=202611270000 + t)
-                    m1c, cc = calibrate(law, m, 202612280000 + 97 * t + m)
-                    for est in vals:
-                        out = evaluate(config, topology, law, m1c, cc if est == "cal_B1" else 0.0,
-                                       est == "cal_B1", 202613290000 + 17 * t, False)
-                        overhead = m * 4.0 / (m * 4.0 + horizon * (200.0 - 4.0))
-                        vals[est].append((1.0 - overhead) * out["se_mean"])
+                overhead = m * 4.0 / (m * 4.0 + horizon * 200.0)
                 operational.append({
                     "law": law,
                     "calibration_frames": m,
                     "horizon_blocks": horizon,
-                    "overhead_fraction": m * 4.0 / (m * 4.0 + horizon * 196.0),
-                    **{f"{est}_net_se_mean": float(np.mean(vals[est])) for est in vals},
+                    "overhead_fraction": overhead,
+                    **{f"{est}_net_se_mean": (1-overhead)*float(np.mean(vals[est])) for est in vals},
                 })
             print("operational", law, m, "done")
 
@@ -129,9 +131,11 @@ def main() -> None:
         "transfer": transfer,
         "mismatch": mismatch,
         "operational": operational,
-        "notes": "New experiment. Overhead uses 4 reference symbols per calibration frame and 196 data symbols per evaluation block.",
+        "notes": "Corrected UatF and independent AP calibration. Overhead adds 4M reference symbols to 200H evaluation symbols; UatF includes 196/200 prelog. Shared-LO receivers retain independence-based covariance (intentional mismatch).",
     }
-    out = Path(__file__).resolve().parent / "output" / "operational_transfer.json"
+    out = Path(__file__).resolve().parent / "output" / os.environ.get("TRANSFER_OUTPUT", "operational_transfer_corrected_20261029.json")
+    if out.exists():
+        raise FileExistsError(f"Refusing to overwrite an existing run: {out}")
     out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print("wrote", out)
 

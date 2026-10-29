@@ -16,22 +16,25 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import os
 from pathlib import Path
 
 import numpy as np
 from scipy.stats import norm
 
-from calibration import LAWS, hessian, mse, oracle_gain
+from calibration import LAWS as ORIGINAL_LAWS, hessian, mse, oracle_gain
+from phase_laws import law_rows
+
+LAWS = dict(ORIGINAL_LAWS, von_mises=(0.90, law_rows(0.90)["von_mises"]["c"]))
 
 HERE = Path(__file__).resolve()
-OUT = HERE.parent / "results" / "cp2_calibration_law.json"
+OUT = HERE.parent / "results" / os.environ.get("CALIBRATION_OUTPUT", "cp2_calibration_law_corrected_20261029.json")
 
 SEED = 2026103101
 REPLICATES = 2000
 FRAMES = (256, 1024, 4096, 16384)
 SIGMA_W2 = (1.0 / 20.0 + 0.01)
-Z90 = float(norm.ppf(0.975))
-BOUND = 1.6448536269514722  # sqrt(chi2_2 at 0.95) / sqrt(2); unused, kept explicit
+Z95 = float(norm.ppf(0.975))
 
 
 def draw_phases(law: str, size: int, rng: np.random.Generator) -> np.ndarray:
@@ -57,10 +60,12 @@ def draw_phases(law: str, size: int, rng: np.random.Generator) -> np.ndarray:
 
 
 def project(m1: float, c: float) -> tuple[float, float, bool]:
+    raw_m1 = m1
+    m1 = float(np.clip(m1, 1e-6, 1.0 - 1e-9))
     lens = 1.0 - m1 * m1
     lower = -lens
     clipped = min(max(c, lower), 0.0)
-    return m1, clipped, abs(clipped - c) > 1e-12
+    return m1, clipped, abs(clipped - c) > 1e-12 or m1 != raw_m1
 
 
 def law_moments(law: str, size: int = 400000, seed: int = 7) -> dict:
@@ -141,8 +146,8 @@ def run_law(law: str, m1_true: float, c_true: float) -> dict:
                 "capture_p90": float(np.quantile(capture, 0.90)),
                 "capture_p95": float(np.quantile(capture, 0.95)),
                 "capture_ci95": [
-                    float(capture.mean() - Z90 * capture.std(ddof=1) / math.sqrt(REPLICATES)),
-                    float(capture.mean() + Z90 * capture.std(ddof=1) / math.sqrt(REPLICATES)),
+                    float(capture.mean() - Z95 * capture.std(ddof=1) / math.sqrt(REPLICATES)),
+                    float(capture.mean() + Z95 * capture.std(ddof=1) / math.sqrt(REPLICATES)),
                 ],
                 "fraction_worse_than_b2": float((capture < 0.0).mean()),
                 "mcse_capture": float(capture.std(ddof=1) / math.sqrt(REPLICATES)),
@@ -200,6 +205,8 @@ def summarize_law(entry: dict) -> dict:
 
 
 def main() -> None:
+    if OUT.exists():
+        raise FileExistsError(f"Refusing to overwrite an existing run: {OUT}")
     payload = {
         "experiment": "calibration on the actual phase laws",
         "seed": SEED,

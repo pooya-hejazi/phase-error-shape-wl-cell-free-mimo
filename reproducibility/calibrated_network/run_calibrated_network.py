@@ -2,7 +2,7 @@
 
 Simulates independent residual-phase links and computes calibrated channel MSE and
 uplink UatF SE with shared reference information per RF chain. Results are written
-to evidence/calibrated_network.json; nothing is overwritten in the frozen packets.
+to output/calibrated_network_corrected_20261029.json; existing outputs are protected.
 """
 from __future__ import annotations
 
@@ -21,12 +21,12 @@ sys.path.insert(0, str(ROOT / "expanded_run_v02/run"))
 from phase_graph_cme.scenario import ScenarioConfig, generate_topology
 from shape_core import shape_spec
 from shape_model import ShapePilotGroupModel
-from shape_estimators import clmmse_shape, widely_linear_mmse_shape
+from shape_estimators import batched_b1_shape, batched_b2_shape, stack_shape_models
 from phase_graph_cme.receivers import rzf_combiner
 
 M1 = 0.90
 TOPOLOGIES = int(os.environ.get("CAL_TOPOLOGIES", "32"))
-REALIZATIONS = int(os.environ.get("CAL_REALIZATIONS", "8"))
+REALIZATIONS = int(os.environ.get("CAL_REALIZATIONS", "64"))
 CAL_M = 1024
 LAWS = ("binary", "uniform", "wrapped_gaussian", "von_mises")
 ESTIMATORS = ("oracle_B1", "cal_B1", "oracle_B2", "cal_B2")
@@ -76,6 +76,10 @@ def calibrate(law: str, m: int, seed: int) -> tuple[float, float]:
     return clip_moments(m1h, c)
 
 
+def calibrate_chains(law, m, seed, chains):
+    return np.asarray([calibrate(law, m, seed + 100003 * ap) for ap in range(chains)]).T
+
+
 def make_frame(topology, config, law: str, seed: int, shared: bool = False):
     rng = np.random.default_rng(seed)
     l, k = config.access_points, config.users
@@ -106,10 +110,14 @@ def make_frame(topology, config, law: str, seed: int, shared: bool = False):
 
 
 def estimate(channels, observations, topology, config, m1a: float, ca: float, wl: bool):
-    if abs(ca) > 1.0 - m1a * m1a + 1e-10:
-        print("LENS DEBUG", m1a, ca)
-        raise ValueError(f"lens violation before estimator: m1a={m1a}, ca={ca}")
+    means = np.broadcast_to(m1a, (config.access_points,))
+    pseudos = np.broadcast_to(ca, (config.access_points,))
+    if not np.all(np.isfinite(means)) or not np.all(np.isfinite(pseudos)):
+        raise ValueError("moment estimates must be finite")
+    if np.any(np.abs(means) > 1) or np.any(np.abs(pseudos) > 1.0 - means**2 + 1e-10):
+        raise ValueError("moment estimates outside the feasible lens")
     estimates = np.empty_like(channels)
+    models, obs, destinations = [], [], []
     for ap in range(config.access_points):
         for pilot in range(config.pilot_symbols):
             users = np.flatnonzero(topology.pilot_indices == pilot).astype(np.int64)
@@ -119,20 +127,26 @@ def estimate(channels, observations, topology, config, m1a: float, ca: float, wl
                 beta=np.full(users.size, config.pilot_coefficient, dtype=np.complex128),
                 noise_covariance=config.pilot_noise_variance * np.eye(
                     config.antennas_per_ap, dtype=np.complex128),
-                m1=np.full(users.size, m1a),
-                m2=np.full(users.size, m1a * m1a + ca),
+                m1=np.full(users.size, means[ap]),
+                m2=np.full(users.size, means[ap] ** 2 + pseudos[ap]),
             )
-            y = observations[ap, :, pilot]
-            for j, u in enumerate(users):
-                estimates[ap, :, u] = (
-                    widely_linear_mmse_shape(model, y, j) if wl else clmmse_shape(model, y, j)
-                )
+            models.append(model)
+            obs.append(observations[ap, :, pilot])
+            destinations.append((ap, users))
+    batch = stack_shape_models(models, obs)
+    values = batched_b1_shape(batch) if wl else batched_b2_shape(batch)
+    for value, (ap, users) in zip(values, destinations):
+        estimates[ap][:, users] = value
     return estimates
 
 
 def uatf(channel: np.ndarray, combiner: np.ndarray, config) -> np.ndarray:
-    h = channel[None, :, :]
-    v = combiner[None, :, :]
+    h = np.asarray(channel)
+    v = np.asarray(combiner)
+    if h.ndim != 3 or h.shape != v.shape or h.shape[0] < 2:
+        raise ValueError("UatF requires paired (frames, antennas, users) arrays with at least two frames")
+    if not np.all(np.isfinite(h)) or not np.all(np.isfinite(v)):
+        raise ValueError("nonfinite UatF input")
     inner = np.einsum("smk,smi->ski", v.conj(), h, optimize=True)
     coh = np.mean(np.diagonal(inner, axis1=1, axis2=2), axis=0)
     second = np.mean(np.abs(inner) ** 2, axis=0)
@@ -140,6 +154,8 @@ def uatf(channel: np.ndarray, combiner: np.ndarray, config) -> np.ndarray:
     powers = np.ones(config.users)
     num = powers * np.abs(coh) ** 2
     den = second @ powers - num + config.payload_noise_variance * norm
+    if np.any(den <= 0):
+        raise ValueError("nonpositive UatF denominator")
     sinr = num / den
     return (1.0 - config.pilot_symbols / config.coherence_symbols) * np.log2(1.0 + sinr)
 
@@ -156,7 +172,8 @@ def main() -> None:
         topology = generate_topology(config, seed=202611010000 + t)
         for law in LAWS:
             m1, m2 = true_moments(law)
-            cal_m1, cal_c = calibrate(law, CAL_M, 202612020000 + 97 * t)
+            cal_m1, cal_c = calibrate_chains(law, CAL_M, 202612020000 + 97 * t,
+                                            config.access_points)
             per_law = {}
             for est in ESTIMATORS:
                 is_b1 = est.endswith("B1")
@@ -166,7 +183,7 @@ def main() -> None:
                 else:
                     ma, ca = m1, (m2 - m1 * m1) if is_b1 else 0.0
                 errs = []
-                se_users = []
+                channels, combiners = [], []
                 per_realization = []
                 for r in range(REALIZATIONS):
                     truth, obs = make_frame(topology, config, law, 202613030000 + 7919 * r + 17 * t)
@@ -178,18 +195,24 @@ def main() -> None:
                                             config.users))
                     truth_flat = truth.reshape((config.access_points * config.antennas_per_ap,
                                                 config.users))
-                    se_user = uatf(truth_flat, rzf_combiner(est_flat, 1.0), config)
-                    se_users.append(se_user)
+                    channels.append(truth_flat)
+                    combiners.append(rzf_combiner(est_flat, 1.0))
                     per_realization.append({"realization": r, "mse": err, "energy": energy,
-                                            "se_per_user": se_user.tolist()})
+                                            })
+                se_users = uatf(np.asarray(channels), np.asarray(combiners), config)
+                convergence = {str(n): uatf(np.asarray(channels[:n]), np.asarray(combiners[:n]), config).tolist()
+                               for n in (8, 16, 32, 64, 128, 256) if n <= REALIZATIONS}
                 per_law[est] = {
                     "mse": float(np.mean(errs)),
                     "energy": float(np.mean([x["energy"] for x in per_realization])),
-                    "se_per_user": np.mean(se_users, axis=0).tolist(),
+                    "se_per_user": se_users.tolist(),
                     "se_mean": float(np.mean(se_users)),
+                    "uatf_prefix_per_user": convergence,
                     "per_realization": per_realization,
                 }
-            records.append({"topology": t, "law": law, "estimators": per_law})
+            records.append({"topology": t, "law": law, "estimators": per_law,
+                            "calibration_m1_by_ap": cal_m1.tolist(),
+                            "calibration_c_by_ap": cal_c.tolist()})
         if (t + 1) % 8 == 0:
             print("topologies completed", t + 1)
     payload = {
@@ -200,12 +223,14 @@ def main() -> None:
         "realizations": REALIZATIONS,
         "laws": list(LAWS),
         "estimators": list(ESTIMATORS),
-        "model": "independent residuals, one calibration estimate per topology/RF chain",
-        "se": "RZF lambda=1, UatF prelog .98, payload power=1 per user",
+        "model": "independent residuals; independent reference window for each AP chain",
+        "se": "RZF lambda=1; UatF moments averaged over frames before SINR/log; prelog .98",
         "records": records,
     }
     out = Path(__file__).resolve().parent / "output" / os.environ.get(
-        "CAL_OUTPUT", "calibrated_network.json")
+        "CAL_OUTPUT", "calibrated_network_corrected_20261029.json")
+    if out.exists():
+        raise FileExistsError(f"Refusing to overwrite an existing run: {out}")
     out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print("wrote", out)
 

@@ -18,3 +18,13 @@ Thumbs.db
 *.synctex.gz
 /paper/*.log
 paper/build/
+
+# Manuscripts and bibliographies are distributed separately.
+*.tex
+*.bib
+*.pdf
+*.docx
+*.zip
+/generated/
+/reproducibility/checks/*.json
+*_reproduced.json

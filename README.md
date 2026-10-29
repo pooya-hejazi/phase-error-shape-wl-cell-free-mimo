@@ -1,311 +1,69 @@
 # Phase-Error Shape in Widely-Linear Channel Estimation for Cell-Free Massive MIMO
 
-Companion code and numerical data for the manuscript:
+Companion code and numerical results by **Pooya Hejazi and Masoud Sabaei**, Amirkabir University of Technology.
 
-> **Phase-Error Shape in Widely-Linear Channel Estimation for Cell-Free Massive MIMO**  
-> Pooya Hejazi and Masoud Sabaei  
-> Amirkabir University of Technology
+**Paper-matched version: `submission-2026-10-29`.** Use the tag cited in the manuscript, rather than a future version of `main`. This repository distributes reproduction code, configurations, synthetic numerical outputs and execution instructions. Manuscript sources, bibliographies, article PDFs and review reports are maintained separately.
 
-**Publication status:** the manuscript is under review and has not been published. The manuscript source and PDF are intentionally not included in this repository; this repository contains the code, configuration, and numerical outputs needed to inspect and reproduce the reported results.
+At a fixed first circular phase moment, the complex-affine estimator B2 is unchanged while the widely-linear estimator B1 depends on the complementary moment `c = m2 - m1²`. The study separates analytic scalar ordering, finite-window moment acquisition, and synthetic network consequences. B1 is optimal within the real-affine class, not generally the unrestricted Bayesian MMSE estimator.
 
----
+## Start here
 
-## Overview
-
-Cell-free massive MIMO systems rely on line-of-sight phase tracking. The residual phase error is commonly summarized by its first circular moment,
-
-$$
-m_1 = \mathbb{E}[\cos\varepsilon].
-$$
-
-This paper shows that $m_1$ alone is insufficient for widely-linear (WL) channel estimation. The WL estimator also depends on the second circular moment through the pseudo-covariance
-
-$$
-c = m_2 - m_1^2,
-\qquad
-m_2 = \mathbb{E}[\cos 2\varepsilon].
-$$
-
-For a fixed $m_1$, the pseudo-covariance is a free coordinate in the interval
-
-$$
--(1-m_1^2) \le c \le 1-m_1^2.
-$$
-
-The complex-affine estimator **B2** uses $m_1$ only, whereas the widely-linear estimator **B1** uses both $m_1$ and $c$. The repository provides the scalar phase-law analysis, the calibration study, the cell-free system experiments, and the post-hoc analyses reported in the manuscript.
-
----
-
-## Key Results
-
-- For $0<m_1<1$, the Binary, Uniform, and Wrapped-Gaussian phase laws have a strict scalar ordering in $|c|$, and therefore in the WL gain.
-- The von Mises comparison is numerical over a 20,001-point grid; it is not presented as an analytic theorem.
-- For the declared phase laws, the calibration experiment gives:
-  - captured gain at $M=1024$: approximately **0.984 / 0.966 / 0.961** for B/U/G;
-  - interpolated 99% crossings: approximately **2,216 / 4,141 / 3,898** frames;
-  - these values are Monte Carlo estimates, not operational guarantees.
-- In three independent cell-free uplink draws with pilot reuse and RZF, the shape-effect estimates are **2.1196**, **2.2079**, and **2.0814**, with the full order in all 64 topologies.
-- The pooled collapse estimate is **1.0590** with a 95% bootstrap interval of **[1.0348, 1.0861]**.
-- The downlink study is limited to maximum-ratio precoding; a full downlink ordering is not claimed.
-
----
-
-## Repository Layout
-
-```text
-analysis/
-  phase_laws.py                  # phase laws, feasible lens, vM numerical check
-  calibration.py                 # baseline calibration, MSE, and risk utilities
-  calibration_law.py             # Monte Carlo calibration on the actual phase laws
-  requirements.txt
-  results/
-    cp1_phase_laws.json          # phase-law ordering and feasible-set results
-    cp2_calibration_law.json     # capture curves, covariance, bias, M*
-
-reproducibility/
-  v08_run/                       # frozen v08 packet, replay, and vendored code
-  system_run/                    # frozen replication packet and analyses
-  expanded_run_v02/              # expanded campaign: kappa and c-sensitivity
-  standard_channel/              # 3GPP UMa standard-channel study
-  downlink/                      # downlink MR-precoding study
-  pooled_collapse.py             # post-hoc pooled analysis
-  pooled_collapse.json
-```
-
-Each frozen packet retains its configuration, environment lock, checksums, and manifest for provenance. Scientific outputs are stored as JSON so that reviewers can inspect them without rerunning the original experiments.
-
----
-
-## Requirements
-
-The analyses were produced with:
-
-```text
-Python 3.12
-numpy  2.5.2
-scipy  1.18.1
-PyYAML 6.0.3
-```
-
-The scalar scripts use the packages listed in `analysis/requirements.txt`. The frozen packets include their own environment locks.
-
-All commands below must be run **from the repository root**.
-
-### Windows
-
-```powershell
+```bash
+git clone https://github.com/pooya-hejazi/phase-error-shape-wl-cell-free-mimo.git
+cd phase-error-shape-wl-cell-free-mimo
+git checkout submission-2026-10-29
 python -m venv .venv
-.venv\Scripts\activate
-python -m pip install -r analysis\requirements.txt
 ```
 
-### Linux / macOS
+Activate with `.venv\Scripts\activate` on Windows or `source .venv/bin/activate` on Linux/macOS, then:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r analysis/requirements.txt
+python -m pip install -r requirements.txt
+python -B reproducibility/verify_release.py
+python -B reproducibility/checks/check_corrections.py
+python -B reproducibility/calibrated_network/summarize.py
+python -B reproducibility/make_figures.py
 ```
 
----
+Python **3.12** is required for the frozen replay; the recorded version is 3.12.10. CPU execution uses NumPy/SciPy, Matplotlib and PyYAML. There are no external datasets, pretrained models or paid solvers. The quick path inspects/reaggregates archived results; it is **not** a full Monte Carlo rerun.
 
-## Quick Review Path
+- [Exact reproduction commands and expected outputs](REPRODUCE.md)
+- [Paper-to-code/result mapping](RESULTS_MAP.md)
+- [Recorded environment](ENVIRONMENT.json)
+- [Release file checksums](RELEASE_MANIFEST.json)
 
-These commands regenerate and verify the main scalar results in about one minute, depending on hardware:
+Generated diagnostic JSON and plots appear in `generated/`, which is excluded from publication. Plots can be opened locally after generation. All archived scientific outputs are readable JSON.
 
-```bash
-python -B analysis/phase_laws.py
-python -B analysis/calibration_law.py
-python -B reproducibility/pooled_collapse.py
-```
+## Principal results
 
-Expected outcomes:
+| Quantity | Binary | Uniform | Wrapped Gaussian | von Mises |
+|---|---:|---:|---:|---:|
+| Scalar oracle gain captured at 1024 frames | 0.983891 | 0.965604 | 0.960891 | 0.957540 |
+| Interpolated 99% crossing (frames) | 2216 | 4141 | 3898 | 3931 |
+| Calibrated uplink SE gain (bit/s/Hz/user) | 0.247729 | 0.176781 | 0.117127 | 0.109196 |
+| Oracle MR downlink SE gain, 128 frames | 0.009757 | 0.006520 | 0.003667 | not evaluated |
 
-- `analysis/phase_laws.py` writes `analysis/results/cp1_phase_laws.json` and prints the phase-law ordering checks.
-- `analysis/calibration_law.py` writes `analysis/results/cp2_calibration_law.json` and prints capture, bias, projection, and $M^\star$ values for each law.
-- `reproducibility/pooled_collapse.py` reads the three stored system outputs and writes `reproducibility/pooled_collapse.json`.
+Calibration crossings are Monte Carlo estimates, not guaranteed stationarity windows. The uplink SE intervals and topology-level quantities are reconstructed by `reproducibility/calibrated_network/summarize.py`. Three independent historical channel-MSE draws yield excess-ratio effects 2.1196, 2.2079 and 2.0814 at first moment 0.90 and Rician factor 20; these are neither percentage MSE reductions nor SE gains.
 
-The calibration script uses deterministic SHA-256-derived seeds. Re-running it should produce byte-identical JSON.
-
----
-
-## Detailed Reproduction Workflow
-
-### Step 1: Scalar phase-law and calibration analyses
-
-```bash
-python -B analysis/phase_laws.py
-python -B analysis/calibration_law.py
-```
-
-| Command | Reads | Writes | Terminal output |
-|---|---|---|---|
-| `analysis/phase_laws.py` | Closed-form phase-law definitions | `analysis/results/cp1_phase_laws.json` | Ordering, sinc inequality, and von Mises grid checks |
-| `analysis/calibration_law.py` | Actual phase-law generators and proper noise | `analysis/results/cp2_calibration_law.json` | Capture, standard error, bias, projection fraction, and $M^\star$ |
-
-`calibration_law.py` performs the 2,000-replicate Monte Carlo calibration. It is the heaviest scalar computation but normally completes in tens of seconds.
-
-### Step 2: Analyze the frozen system outputs
-
-```bash
-python -B reproducibility/expanded_run_v02/analyze_expanded.py
-python -B reproducibility/system_run/analyze_replication.py
-python -B reproducibility/system_run/robustness_replication.py
-```
-
-| Command | Reads | Writes | Terminal output |
-|---|---|---|---|
-| `expanded_run_v02/analyze_expanded.py` | `expanded_run_v02/output/E10_shape_output.json` | `expanded_run_v02/output/expanded_analysis.json` | Block effects and controls |
-| `system_run/analyze_replication.py` | `system_run/output/E10_shape_output.json` | No file | Ordering, collapse, controls, and paired contrasts |
-| `system_run/robustness_replication.py` | `system_run/output/E10_shape_output.json` | No file | Standard errors, power, MDD, jackknife, and distance to the collapse threshold |
-
-To retain the terminal-only reports:
-
-```powershell
-python -B reproducibility/system_run/analyze_replication.py | Tee-Object -FilePath replication_report.txt
-python -B reproducibility/system_run/robustness_replication.py | Tee-Object -FilePath robustness_report.txt
-```
-
-On Linux or macOS, use `tee` instead of `Tee-Object`.
-
-### Step 3: Downlink and standard-channel studies
-
-```bash
-python -B reproducibility/downlink/run_downlink.py
-python -B reproducibility/standard_channel/run_standard.py
-```
-
-| Command | Writes | Main contents |
-|---|---|---|
-| `downlink/run_downlink.py` | `reproducibility/downlink/results.json` | Deterministic self-test, mean SE, paired intervals, and positive-topology counts |
-| `standard_channel/run_standard.py` | `reproducibility/standard_channel/results.json` | Both UMa variants, ordering counts, and validation checks |
-
-The downlink run normally takes about one minute. The standard-channel run takes several minutes; both depend on hardware.
-
-### Step 4: Pooled analysis
-
-```bash
-python -B reproducibility/pooled_collapse.py
-```
-
-This script reads:
+## Layout
 
 ```text
-reproducibility/v08_run/run/output/E10_shape_output.json
-reproducibility/system_run/output/E10_shape_output.json
-reproducibility/expanded_run_v02/output/E10_shape_output.json
+analysis/                         scalar laws, calibration, archived scalar outputs
+reproducibility/calibrated_network/  corrected uplink, transfer and summaries
+reproducibility/downlink/          historical 16-frame and final 128-frame results
+reproducibility/standard_channel/  UMa-inspired sensitivity
+reproducibility/v08_run/           frozen primary campaign and vendored library
+reproducibility/system_run/        independent replication
+reproducibility/expanded_run_v02/   Rician-factor and moment-error sensitivity
+reproducibility/checks/            independent numerical checks
+reproducibility/replay_frozen.py   portable replay of any of the three campaigns
+reproducibility/make_figures.py    local regeneration of plots
 ```
 
-and writes `reproducibility/pooled_collapse.json`.
+## Version and scope
 
-Reference values:
+The `corrected_20261029.json` outputs supersede earlier calibration, calibrated-network and transfer files. The corrected UatF rate averages effective-channel moments over frames **before** SINR and logarithm; reference calibration is independent per AP. Historical files remain for provenance and must not be substituted for the mapped final results. The 128-frame downlink extension supersedes the earlier 16-frame conclusion.
 
-```text
-M090: pooled_effect = 2.1372452505
-      interval      = [2.0789193293, 2.2074038563]
-M099: pooled_effect = 1.0589764846
-      interval      = [1.0347764372, 1.0861185945]
-```
+All experiments are synthetic. Baselines share observations and receiver rules; oracle versus calibrated information is labeled. The network order is empirical, the von Mises order is numerical, common-per-AP residuals deliberately test covariance mismatch, and UMa-inspired sensitivity is not a full standardized channel model. The work does not establish hardware tracking performance or certify every tail condition of the calibration theorem.
 
-### Step 5: Inspect a JSON result
-
-To print a formatted JSON file:
-
-```bash
-python -B -c "import json; p='analysis/results/cp2_calibration_law.json'; print(json.dumps(json.load(open(p, encoding='utf-8')), indent=2, ensure_ascii=False))"
-```
-
-To print only the calibration summary:
-
-```bash
-python -B -c "import json; d=json.load(open('analysis/results/cp2_calibration_law.json', encoding='utf-8')); print(json.dumps(d['summary'], indent=2))"
-```
-
-If `jq` is installed:
-
-```bash
-jq '.summary' analysis/results/cp2_calibration_law.json
-jq '.M099.pooled_effect, .M099.pooled_interval' reproducibility/pooled_collapse.json
-```
-
----
-
-## Files Overwritten by the Analysis Scripts
-
-The reviewer workflow overwrites only these derived outputs:
-
-- `analysis/results/cp1_phase_laws.json`
-- `analysis/results/cp2_calibration_law.json`
-- `reproducibility/expanded_run_v02/output/expanded_analysis.json`
-- `reproducibility/downlink/results.json`
-- `reproducibility/standard_channel/results.json`
-- `reproducibility/pooled_collapse.json`
-
-The files named `E10_shape_output.json` are frozen scientific outputs. The analysis commands above do not overwrite them.
-
-Do **not** run the frozen experiment drivers as part of a normal review:
-
-```text
-reproducibility/v08_run/run/E10_shape_run.py
-reproducibility/system_run/E10_shape_run.py
-reproducibility/expanded_run_v02/run/E10_shape_run.py
-```
-
-They are the original experiment drivers, not analysis scripts.
-
----
-
-## Full v08 Replay
-
-The complete v08 replay is available but is not required for the quick review path:
-
-```bash
-python -B reproducibility/v08_run/replay.py
-```
-
-On the original hardware, the replay took approximately 70 minutes. It reconstructs the historical directory layout, refuses to start if an unrelated `src/` directory exists, and removes only the paths it created. The comparison covers 20 scientific sections and 1,600 records at a relative tolerance of `1e-12`.
-
-Replay outputs:
-
-| Path | Contents |
-|---|---|
-| `reproducibility/v08_run/replay_output/E10_shape_output.json` | Fresh replay output retained for comparison |
-| `reproducibility/v08_run/REPLAY_RESULT_ROUND3.json` | Section list, record count, SHA-256, and mismatch report |
-
----
-
-## Reference Data
-
-| File | Contents |
-|---|---|
-| `analysis/results/cp1_phase_laws.json` | Analytic and numerical phase-law ordering results |
-| `analysis/results/cp2_calibration_law.json` | Capture curves, joint covariance, bias, projection, and $M^\star$ |
-| `reproducibility/v08_run/run/output/E10_shape_output.json` | Frozen primary v08 output |
-| `reproducibility/system_run/output/E10_shape_output.json` | Frozen replication output |
-| `reproducibility/expanded_run_v02/output/E10_shape_output.json` | Frozen expanded and sensitivity output |
-| `reproducibility/pooled_collapse.json` | Pooled analysis of the three draws |
-| `reproducibility/downlink/results.json` | Downlink results and deterministic self-test |
-| `reproducibility/standard_channel/results.json` | 3GPP UMa standard-channel results |
-
----
-
-## Scope and Limitations
-
-The following qualifications are part of the manuscript's claims:
-
-- The B/U/G ordering is analytic for $0<m_1<1$. The von Mises ordering is numerical over a finite grid.
-- The cell-free results are from a synthetic channel model, not a hardware testbed or multi-site measurement.
-- The expanded calibration cells are $c$-only sensitivity checks. They do not validate a closed-loop tracker.
-- The scalar calibration result combines a conditional theorem with Monte Carlo; the estimated window is not a universal operational guarantee.
-- The binary law is a boundary case, and a substantial fraction of its calibration windows are projected onto the feasible boundary.
-- The downlink study uses maximum-ratio precoding only. The paired intervals do not resolve the full downlink ordering.
-- The standard-channel study is frequency-flat and does not model delay dispersion.
-
----
-
-## Contact
-
-Questions about the code or data can be directed to the authors:
-
-- Pooya Hejazi — `pooya.hejazi@aut.ac.ir`
-- Masoud Sabaei — `sabaei@aut.ac.ir`
+Questions and reproducibility discrepancies can be raised through repository Issues. Please include the version, environment, command and comparison report. Do not upload confidential manuscripts or credentials.

@@ -51,11 +51,7 @@ def main() -> None:
     rotated_estimate = widely_linear_mmse_shape(rotated, phase * y, 0)
     equiv_error = float(np.linalg.norm(rotated_estimate - phase * b1))
 
-    mse_b1, mse_b2 = [], []
-    for _ in range(4000):
-        y = rng.standard_normal(n) + 1j * rng.standard_normal(n)
-        mse_b1.append(float(np.linalg.norm(widely_linear_mmse_shape(model, y, 0)) ** 2))
-        mse_b2.append(float(np.linalg.norm(clmmse_shape(model, y, 0)) ** 2))
+    assert eig > 0 and scalar_gap < 1e-12 and equiv_error < 1e-12
 
     payload = {
         "seed": 20261115,
@@ -66,10 +62,11 @@ def main() -> None:
         "vector_shape": list(ell.shape),
         "covariance_hermitian_error": float(np.max(np.abs(cov_y - cov_y.conj().T))),
         "pseudo_symmetry_error": float(np.max(np.abs(pseudo_y - pseudo_y.T))),
-        "mc_relative_std_B1": float(np.std(mse_b1) / np.mean(mse_b1)),
-        "mc_relative_std_B2": float(np.std(mse_b2) / np.mean(mse_b2)),
+        "scope": "algebraic checks only; actual-phase Monte Carlo risk is tested separately in check_theory.py",
     }
-    out = Path(__file__).resolve().parent / "output" / "vector_validation.json"
+    out = Path(__file__).resolve().parent / "output" / "vector_validation_corrected_20261029.json"
+    if out.exists():
+        raise FileExistsError(f"Refusing to overwrite {out}")
     out.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(json.dumps(payload, indent=2))
 
