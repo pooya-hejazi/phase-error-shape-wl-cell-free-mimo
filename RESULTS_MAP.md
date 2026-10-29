@@ -1,6 +1,6 @@
 # Mapping the manuscript to executable evidence
 
-Version: `submission-2026-10-29-v2`. Figure/table names below identify the audited manuscript, regardless of later numbering changes. The local manuscript and its bibliography are deliberately not included here.
+Version: `submission-2026-10-29-v3`. Figure/table names below identify the audited manuscript, regardless of later numbering changes. The local manuscript and its bibliography are deliberately not included here.
 
 | Paper result | Final numerical evidence | Regeneration / inspection |
 |---|---|---|
