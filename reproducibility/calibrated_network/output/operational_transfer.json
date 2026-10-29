@@ -1,0 +1,517 @@
+{
+  "experiment": "operational transferability and overhead",
+  "m1": 0.9,
+  "topologies": 8,
+  "realizations": 4,
+  "transfer": [
+    {
+      "law": "binary",
+      "shared_lo": false,
+      "se_gain_B1_minus_B2_mean": 0.3471121254903201,
+      "se_gain_interval": [
+        0.26750172837156083,
+        0.4352751923843226
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.7748900052644188
+    },
+    {
+      "law": "uniform",
+      "shared_lo": false,
+      "se_gain_B1_minus_B2_mean": 0.22322003532004964,
+      "se_gain_interval": [
+        0.16337932497419583,
+        0.2892887246207243
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.843137117411843
+    },
+    {
+      "law": "wrapped_gaussian",
+      "shared_lo": false,
+      "se_gain_B1_minus_B2_mean": 0.16586801568258902,
+      "se_gain_interval": [
+        0.10797311203364986,
+        0.22494695068206436
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.8782988408086083
+    },
+    {
+      "law": "von_mises",
+      "shared_lo": false,
+      "se_gain_B1_minus_B2_mean": 0.09470871638963552,
+      "se_gain_interval": [
+        0.0572803466830023,
+        0.13315752190208702
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.9265198655899202
+    },
+    {
+      "law": "binary",
+      "shared_lo": true,
+      "se_gain_B1_minus_B2_mean": 0.2776697344798067,
+      "se_gain_interval": [
+        0.24176355466855343,
+        0.3183764731342974
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.7998356743766513
+    },
+    {
+      "law": "uniform",
+      "shared_lo": true,
+      "se_gain_B1_minus_B2_mean": 0.18787060041188142,
+      "se_gain_interval": [
+        0.1563415614490857,
+        0.218459966026886
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.8553432904834595
+    },
+    {
+      "law": "wrapped_gaussian",
+      "shared_lo": true,
+      "se_gain_B1_minus_B2_mean": 0.14828922027881686,
+      "se_gain_interval": [
+        0.10063462734154334,
+        0.1950835096718202
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.8718229428538014
+    },
+    {
+      "law": "von_mises",
+      "shared_lo": true,
+      "se_gain_B1_minus_B2_mean": 0.10768104398587897,
+      "se_gain_interval": [
+        0.06603285828235578,
+        0.1467421274967338
+      ],
+      "nmse_ratio_B1_over_B2_mean": 0.8847177319510087
+    }
+  ],
+  "mismatch": [
+    {
+      "reference_law": "binary",
+      "data_law": "uniform",
+      "se_gain_B1_minus_oracle_B2_mean": 0.16358290535535303,
+      "se_gain_interval": [
+        0.12282114819766296,
+        0.22346026518748016
+      ],
+      "nmse_ratio_B1_over_oracle_B2_mean": 0.8772362565650884
+    },
+    {
+      "reference_law": "uniform",
+      "data_law": "binary",
+      "se_gain_B1_minus_oracle_B2_mean": 0.22880951286644835,
+      "se_gain_interval": [
+        0.19126770866602127,
+        0.2681979512902302
+      ],
+      "nmse_ratio_B1_over_oracle_B2_mean": 0.8307999952283361
+    },
+    {
+      "reference_law": "wrapped_gaussian",
+      "data_law": "von_mises",
+      "se_gain_B1_minus_oracle_B2_mean": 0.1142021083713588,
+      "se_gain_interval": [
+        0.06789842948195801,
+        0.1666259222647525
+      ],
+      "nmse_ratio_B1_over_oracle_B2_mean": 0.9271797105152483
+    },
+    {
+      "reference_law": "von_mises",
+      "data_law": "wrapped_gaussian",
+      "se_gain_B1_minus_oracle_B2_mean": 0.12756821249712136,
+      "se_gain_interval": [
+        0.1022698041253161,
+        0.15370758086270123
+      ],
+      "nmse_ratio_B1_over_oracle_B2_mean": 0.9051080363325064
+    }
+  ],
+  "operational": [
+    {
+      "law": "binary",
+      "calibration_frames": 64,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.11119160041449,
+      "cal_B2_net_se_mean": 7.909863416132723
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 64,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.356985285275535,
+      "cal_B2_net_se_mean": 8.149556246924625
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 64,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.002544529262086514,
+      "cal_B1_net_se_mean": 8.420779066079167,
+      "cal_B2_net_se_mean": 8.211766599954583
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 256,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.283323691594489,
+      "cal_B2_net_se_mean": 7.08018766447491
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 256,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.14018530237031,
+      "cal_B2_net_se_mean": 7.913150919119017
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 256,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.38685758426032,
+      "cal_B2_net_se_mean": 8.152943371213532
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 1024,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.1241411420079395,
+      "cal_B2_net_se_mean": 4.982782490447921
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 1024,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.281674254432335,
+      "cal_B2_net_se_mean": 7.080796170636519
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 1024,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.138341813777316,
+      "cal_B2_net_se_mean": 7.913831014240815
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 4096,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.7231638418079096,
+      "cal_B1_net_se_mean": 2.3454989030697413,
+      "cal_B2_net_se_mean": 2.2797555190724186
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 4096,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.125349454856102,
+      "cal_B2_net_se_mean": 4.981687986121212
+    },
+    {
+      "law": "binary",
+      "calibration_frames": 4096,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.283391330584987,
+      "cal_B2_net_se_mean": 7.079240822382774
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 64,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.092931892526035,
+      "cal_B2_net_se_mean": 7.957447022858338
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 64,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.338172252905611,
+      "cal_B2_net_se_mean": 8.198581781126771
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 64,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.002544529262086514,
+      "cal_B1_net_se_mean": 8.401822422775119,
+      "cal_B2_net_se_mean": 8.261166374875831
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 256,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.262138750041691,
+      "cal_B2_net_se_mean": 7.1247730333585135
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 256,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.116508014752478,
+      "cal_B2_net_se_mean": 7.96298162551834
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 256,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.36246280307831,
+      "cal_B2_net_se_mean": 8.204284099018896
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 1024,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.114420528300727,
+      "cal_B2_net_se_mean": 5.01523548523414
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 1024,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.267860750743138,
+      "cal_B2_net_se_mean": 7.126913584280093
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 1024,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.122903192007037,
+      "cal_B2_net_se_mean": 7.965374005960103
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 4096,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.7231638418079096,
+      "cal_B1_net_se_mean": 2.3402598645324812,
+      "cal_B2_net_se_mean": 2.294543164205835
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 4096,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.113901185459867,
+      "cal_B2_net_se_mean": 5.014001729190529
+    },
+    {
+      "law": "uniform",
+      "calibration_frames": 4096,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.267122737232443,
+      "cal_B2_net_se_mean": 7.125160352007593
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 64,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.06221113945758,
+      "cal_B2_net_se_mean": 7.9665804647793905
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 64,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.30652056792599,
+      "cal_B2_net_se_mean": 8.20799199401513
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 64,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.002544529262086514,
+      "cal_B1_net_se_mean": 8.369929121879624,
+      "cal_B2_net_se_mean": 8.27064842145036
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 256,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.237984395791323,
+      "cal_B2_net_se_mean": 7.1428784917179735
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 256,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.089511971766772,
+      "cal_B2_net_se_mean": 7.983217137802441
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 256,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.33464869818395,
+      "cal_B2_net_se_mean": 8.22513280864494
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 1024,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.095944069946568,
+      "cal_B2_net_se_mean": 5.02494589699856
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 1024,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.241604730976701,
+      "cal_B2_net_se_mean": 7.140712590471637
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 1024,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.093558228738665,
+      "cal_B2_net_se_mean": 7.980796424644771
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 4096,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.7231638418079096,
+      "cal_B1_net_se_mean": 2.331898960543395,
+      "cal_B2_net_se_mean": 2.299588197609471
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 4096,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.0956310619281595,
+      "cal_B2_net_se_mean": 5.025026061442919
+    },
+    {
+      "law": "wrapped_gaussian",
+      "calibration_frames": 4096,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.241159930108438,
+      "cal_B2_net_se_mean": 7.140826508366252
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 64,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.024953467417818,
+      "cal_B2_net_se_mean": 7.909220628586618
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 64,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.26813387552139,
+      "cal_B2_net_se_mean": 8.148893980968031
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 64,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.002544529262086514,
+      "cal_B1_net_se_mean": 8.331249401288726,
+      "cal_B2_net_se_mean": 8.211099278532672
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 256,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.2010902900512175,
+      "cal_B2_net_se_mean": 7.078559571261859
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 256,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.04827738299842,
+      "cal_B2_net_se_mean": 7.91133128552796
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 256,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.010101010101010102,
+      "cal_B1_net_se_mean": 8.292164576422614,
+      "cal_B2_net_se_mean": 8.151068597210624
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 1024,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.065211215668573,
+      "cal_B2_net_se_mean": 4.980799111790654
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 1024,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.197931727529025,
+      "cal_B2_net_se_mean": 7.077977685176192
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 1024,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.0392156862745098,
+      "cal_B1_net_se_mean": 8.04474722488538,
+      "cal_B2_net_se_mean": 7.910680942255744
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 4096,
+      "horizon_blocks": 32,
+      "overhead_fraction": 0.7231638418079096,
+      "cal_B1_net_se_mean": 2.317603892087079,
+      "cal_B2_net_se_mean": 2.279621399694451
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 4096,
+      "horizon_blocks": 128,
+      "overhead_fraction": 0.3950617283950617,
+      "cal_B1_net_se_mean": 5.064393690116209,
+      "cal_B2_net_se_mean": 4.98139491044343
+    },
+    {
+      "law": "von_mises",
+      "calibration_frames": 4096,
+      "horizon_blocks": 512,
+      "overhead_fraction": 0.14035087719298245,
+      "cal_B1_net_se_mean": 7.196769980691455,
+      "cal_B2_net_se_mean": 7.07882434641961
+    }
+  ],
+  "notes": "New experiment. Overhead uses 4 reference symbols per calibration frame and 196 data symbols per evaluation block."
+}

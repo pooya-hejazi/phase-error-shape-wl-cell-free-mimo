@@ -135,12 +135,22 @@ def run_law(law: str, m1_true: float, c_true: float) -> dict:
                 "projection_fraction": float(active.mean()),
                 "capture_mean": float(capture.mean()),
                 "capture_sd": float(capture.std(ddof=1)),
+                "capture_p05": float(np.quantile(capture, 0.05)),
+                "capture_p10": float(np.quantile(capture, 0.10)),
+                "capture_p50": float(np.quantile(capture, 0.50)),
+                "capture_p90": float(np.quantile(capture, 0.90)),
+                "capture_p95": float(np.quantile(capture, 0.95)),
                 "capture_ci95": [
                     float(capture.mean() - Z90 * capture.std(ddof=1) / math.sqrt(REPLICATES)),
                     float(capture.mean() + Z90 * capture.std(ddof=1) / math.sqrt(REPLICATES)),
                 ],
                 "fraction_worse_than_b2": float((capture < 0.0).mean()),
                 "mcse_capture": float(capture.std(ddof=1) / math.sqrt(REPLICATES)),
+                "diagnostic_draws": {
+                    "m1_hat": [float(x) for x in m1_hat[:500]],
+                    "c_hat": [float(x) for x in c_hat[:500]],
+                    "capture": [float(x) for x in capture[:500]],
+                },
             }
         )
     return {

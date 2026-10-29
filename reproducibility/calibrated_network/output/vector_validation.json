@@ -1,0 +1,15 @@
+{
+  "seed": 20261115,
+  "augmented_min_eigenvalue": 0.15211260576142643,
+  "augmented_psd": true,
+  "c0_reduction_gap": 0.0,
+  "phase_equivariance_error": 2.3055512673781017e-16,
+  "vector_shape": [
+    2,
+    2
+  ],
+  "covariance_hermitian_error": 0.0,
+  "pseudo_symmetry_error": 0.0,
+  "mc_relative_std_B1": 0.8221516046729921,
+  "mc_relative_std_B2": 0.8556028381167529
+}
