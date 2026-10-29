@@ -101,6 +101,54 @@ def _arrow(ax, p, q, color="#31556f", ls="-", lw=0.8):
                                  color=color, linestyle=ls, shrinkA=1, shrinkB=1))
 
 
+def figure_system_model() -> None:
+    """Schematic of the stated model; node positions are illustrative, not simulation data."""
+    from matplotlib.patches import Rectangle
+    fig, ax = plt.subplots(figsize=(7.16, 2.95))
+    ax.set(xlim=(0, 100), ylim=(0, 70)); ax.axis("off")
+    blue, gray, orange = "#0072B2", "#697888", "#D55E00"
+    ax.text(1, 67, "Cell-free uplink: reused pilots and centralized estimation", fontsize=8.5, weight="bold")
+    users = [(7, 54, r"UE $k$"), (7, 39, r"UE $i$"), (7, 24, r"UE $K$")]
+    aps = [(36, 54, r"AP $1$"), (36, 39, r"AP $l$"), (36, 24, r"AP $L$")]
+    for u, a in [(0, 0), (0, 1), (1, 1), (1, 2), (2, 0), (2, 2)]:
+        x, y, _ = users[u]; xx, yy, _ = aps[a]
+        _arrow(ax, (x + 2.5, y), (xx - 3, yy), color=blue if (u, a) == (0, 1) else gray,
+               ls="--", lw=1.1 if (u, a) == (0, 1) else .65)
+    for x, y, label in users:
+        ax.add_patch(Rectangle((x - 2, y - 3.7), 4, 7.4, facecolor="#EFF7FC", edgecolor=blue, linewidth=.9))
+        ax.plot([x - 1, x + 1], [y - 2.6, y - 2.6], color=blue, lw=.7)
+        ax.text(x - 3.3, y, label, ha="right", va="center", fontsize=7)
+    ax.text(17, 60, r"$k,i\in\mathcal{P}_k$", fontsize=8, color=blue)
+    ax.text(17, 56, "same pilot", fontsize=6.8, color=blue)
+    ax.text(19, 44, r"$\mathbf{h}_{k,l}$", fontsize=9, color=blue,
+            bbox=dict(facecolor="white", edgecolor="none", pad=.5))
+    for x, y, label in aps:
+        ax.plot([x - 2, x, x + 2], [y - 3, y + 3, y - 3], color="#263E52", lw=.9)
+        ax.plot([x - 2.5, x + 2.5], [y - 3, y - 3], color="#263E52", lw=.9)
+        ax.plot([x, x], [y - 2, y + 3.5], color="#263E52", lw=.9)
+        ax.text(x + 4, y + 1, label, fontsize=7.3, va="center")
+        ax.text(x + 4, y - 3, r"$N$ antennas", fontsize=6.5, va="center")
+        ax.plot([49, 57], [y, y], color="#263E52", lw=1)
+    ax.plot([57, 57], [24, 54], color="#263E52", lw=1)
+    _arrow(ax, (57, 39), (64, 39), color="#263E52", lw=1.1)
+    ax.text(53, 60, "error-free", fontsize=6.7, ha="center")
+    ax.text(53, 56.5, "fronthaul", fontsize=6.7, ha="center")
+    ax.text(66, 59, r"$\mathbf{h}_{k,l}=\boldsymbol{\ell}_{k,l}e^{j\varepsilon_{k,l}}+\mathbf{g}_{k,l}$", fontsize=9)
+    ax.text(66, 53, "Residual phase on LoS + correlated NLoS", fontsize=6.6)
+    _box(ax, 65, 29, 34, 17, "CPU: shared pilot observations\nB1: widely linear ($m_1,c$)\nB2: complex affine ($m_1$)", fs=7.5)
+    ax.text(78, 24, "Channel MSE; separate RZF / UatF study", ha="center", fontsize=6.4)
+    ax.text(1, 16.5, "Separate calibration window", fontsize=7.5, weight="bold", color=orange)
+    _box(ax, 1, 3, 27, 10, "Known reference link at each AP\n$M$ observations; no pilot reuse", fc="#FFF3E8", ec=orange, fs=6.8)
+    _box(ax, 36, 3, 28, 10, "Estimate $m_1$ and $c$\nclip to the signed feasible set", fc="#FFF3E8", ec=orange, fs=7)
+    _arrow(ax, (28.5, 8), (35.5, 8), color=orange, lw=1)
+    ax.plot([64.5, 97, 97], [8, 8, 20], color=orange, lw=1)
+    _arrow(ax, (97, 20), (97, 28.5), color=orange, lw=1)
+    ax.text(79, 13, "Stationary moment sharing", fontsize=6.7, ha="center", color=orange)
+    ax.text(79, 3, "Disjoint evaluation samples", fontsize=6.7, ha="center", color=orange)
+    save_figure(fig, "fig1_system_model")
+    plt.close(fig)
+
+
 def figure_architecture() -> None:
     fig, ax = plt.subplots(figsize=(7.16, 2.95))
     ax.set_xlim(0, 100); ax.set_ylim(0, 60); ax.axis("off")
@@ -588,6 +636,7 @@ def figure_network() -> None:
 
 
 if __name__ == "__main__":
+    figure_system_model()
     figure_architecture()
     figure_shape_panels()
     figure_scalar_benefit()

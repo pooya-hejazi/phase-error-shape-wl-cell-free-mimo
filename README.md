@@ -2,7 +2,7 @@
 
 Companion code and numerical results by **Pooya Hejazi and Masoud Sabaei**, Amirkabir University of Technology.
 
-**Paper-matched version: `submission-2026-10-29-v2`.** Use the tag cited in the manuscript, rather than a future version of `main`. This repository distributes reproduction code, configurations, synthetic numerical outputs and execution instructions. Manuscript sources, bibliographies, article PDFs and review reports are maintained separately.
+**Paper-matched version: `submission-2026-10-29-v3`.** Use the tag cited in the manuscript, rather than a future version of `main`. This repository distributes reproduction code, configurations, synthetic numerical outputs and execution instructions. Manuscript sources, bibliographies, article PDFs and review reports are maintained separately.
 
 At a fixed first circular phase moment, the complex-affine estimator B2 is unchanged while the widely-linear estimator B1 depends on the complementary moment `c = m2 - m1²`. The study separates analytic scalar ordering, finite-window moment acquisition, and synthetic network consequences. B1 is optimal within the real-affine class, not generally the unrestricted Bayesian MMSE estimator.
 
@@ -11,7 +11,7 @@ At a fixed first circular phase moment, the complex-affine estimator B2 is uncha
 ```bash
 git clone https://github.com/pooya-hejazi/phase-error-shape-wl-cell-free-mimo.git
 cd phase-error-shape-wl-cell-free-mimo
-git checkout submission-2026-10-29-v2
+git checkout submission-2026-10-29-v3
 python -m venv .venv
 ```
 
@@ -69,3 +69,5 @@ All experiments are synthetic. Baselines share observations and receiver rules; 
 Questions and reproducibility discrepancies can be raised through repository Issues. Please include the version, environment, command and comparison report. Do not upload confidential manuscripts or credentials.
 
 The v2 tag improves print typography, color/line differentiation, legends and diagram flow. It computes the mismatch matrix directly from the scalar risk and uses the standard empirical CDF steps. Archived simulation data and reported numerical results are unchanged from v1. Generated vector PDFs and 600 dpi PNGs stay local.
+
+The v3 tag adds the exact system-model schematic (`fig1_system_model`): distributed APs, reused user pilots, error-free fronthaul, residual-LoS phase, centralized estimation and disjoint moment calibration. It replaces the information-flow-only figure in the manuscript; the earlier flow diagram remains reproducible. The diagram is drawn directly as vector artwork, without a visible watermark. Node positions and selected links are schematic, not a simulated deployment. Numerical data are unchanged.
