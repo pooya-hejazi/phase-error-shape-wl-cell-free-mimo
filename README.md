@@ -2,7 +2,7 @@
 
 Companion code and numerical results by **Pooya Hejazi and Masoud Sabaei**, Amirkabir University of Technology.
 
-**Paper-matched version: `submission-2026-10-29`.** Use the tag cited in the manuscript, rather than a future version of `main`. This repository distributes reproduction code, configurations, synthetic numerical outputs and execution instructions. Manuscript sources, bibliographies, article PDFs and review reports are maintained separately.
+**Paper-matched version: `submission-2026-10-29-v2`.** Use the tag cited in the manuscript, rather than a future version of `main`. This repository distributes reproduction code, configurations, synthetic numerical outputs and execution instructions. Manuscript sources, bibliographies, article PDFs and review reports are maintained separately.
 
 At a fixed first circular phase moment, the complex-affine estimator B2 is unchanged while the widely-linear estimator B1 depends on the complementary moment `c = m2 - m1²`. The study separates analytic scalar ordering, finite-window moment acquisition, and synthetic network consequences. B1 is optimal within the real-affine class, not generally the unrestricted Bayesian MMSE estimator.
 
@@ -11,7 +11,7 @@ At a fixed first circular phase moment, the complex-affine estimator B2 is uncha
 ```bash
 git clone https://github.com/pooya-hejazi/phase-error-shape-wl-cell-free-mimo.git
 cd phase-error-shape-wl-cell-free-mimo
-git checkout submission-2026-10-29
+git checkout submission-2026-10-29-v2
 python -m venv .venv
 ```
 
@@ -67,3 +67,5 @@ The `corrected_20261029.json` outputs supersede earlier calibration, calibrated-
 All experiments are synthetic. Baselines share observations and receiver rules; oracle versus calibrated information is labeled. The network order is empirical, the von Mises order is numerical, common-per-AP residuals deliberately test covariance mismatch, and UMa-inspired sensitivity is not a full standardized channel model. The work does not establish hardware tracking performance or certify every tail condition of the calibration theorem.
 
 Questions and reproducibility discrepancies can be raised through repository Issues. Please include the version, environment, command and comparison report. Do not upload confidential manuscripts or credentials.
+
+The v2 tag improves print typography, color/line differentiation, legends and diagram flow. It computes the mismatch matrix directly from the scalar risk and uses the standard empirical CDF steps. Archived simulation data and reported numerical results are unchanged from v1. Generated vector PDFs and 600 dpi PNGs stay local.
