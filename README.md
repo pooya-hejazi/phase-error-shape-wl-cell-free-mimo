@@ -1,6 +1,8 @@
 # Phase-Error Shape in Widely-Linear Channel Estimation for Cell-Free Massive MIMO
 
-Companion code and numerical results by **Pooya Hejazi and Masoud Sabaei**, Amirkabir University of Technology.
+**Pooya Hejazi is the author and maintainer of this repository.**
+
+This repository contains the companion code and numerical results for the paper by Pooya Hejazi and Masoud Sabaei, Amirkabir University of Technology.
 
 **Paper-matched version: `submission-2026-10-29-v3`.** Use the tag cited in the manuscript, rather than a future version of `main`. This repository distributes reproduction code, configurations, synthetic numerical outputs and execution instructions. Manuscript sources, bibliographies, article PDFs and review reports are maintained separately.
 
